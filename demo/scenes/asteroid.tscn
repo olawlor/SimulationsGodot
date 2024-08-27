@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://brln0ssq16q4o"]
+
+[ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="1_qtfi8"]
+[ext_resource type="PackedScene" uid="uid://ck0mil0c25ynp" path="res://meshes/rock_lump2.glb" id="2_a8o3b"]
+[ext_resource type="PackedScene" uid="uid://0ucst011xibl" path="res://truss/cube3_truss.tscn" id="3_ygcqy"]
+[ext_resource type="PackedScene" uid="uid://duka2pb4lj22p" path="res://truss/armpivot.glb" id="4_0asfe"]
+
+[sub_resource type="Environment" id="Environment_w8noi"]
+background_energy_multiplier = 0.05
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.948169, 0.317768, 0, -0.317768, 0.948168, 0, 1.33074, 4.13565)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.80478, 0.156738, -0.572506, 0.337833, 0.6721, 0.658901, 0.488056, -0.723681, 0.487942, -1.18414, 3.62911, -1.3364)
+shadow_enabled = true
+
+[node name="AsteroidEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w8noi")
+
+[node name="rock_lump2" parent="." instance=ExtResource("2_a8o3b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271482, 0)
+
+[node name="rock_lump1" parent="." instance=ExtResource("1_qtfi8")]
+transform = Transform3D(5.04609, 0, 0, 0, 5.04609, 0, 0, 0, 5.04609, 0, -1.99466, 0)
+
+[node name="cube3_truss" parent="." instance=ExtResource("3_ygcqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3531, -1.07056, 0)
+
+[node name="armpivot" parent="." instance=ExtResource("4_0asfe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34638, 2.42784, 0)

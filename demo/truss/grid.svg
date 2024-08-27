@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024mm"
+   height="1024mm"
+   viewBox="0 0 1024 1024"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="grid.svg"
+   inkscape:export-filename="/home/olawlor/grid.png"
+   inkscape:export-xdpi="50.799999"
+   inkscape:export-ydpi="50.799999"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.175"
+     inkscape:cx="2122.8571"
+     inkscape:cy="1762.8571"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g894"
+     showgrid="false"
+     inkscape:window-width="1850"
+     inkscape:window-height="1016"
+     inkscape:window-x="70"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false"
+     inkscape:pagecheckerboard="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,727)">
+    <g
+       id="g894"
+       transform="matrix(1.0177925,0,0,1.0177925,-9.108926,3.7984911)"
+       style="stroke-width:0.98251849">
+      <g
+         transform="translate(1.5119048,4.5357143)"
+         id="g864"
+         style="stroke-width:0.98251849;fill:#f0f0f0;fill-opacity:1">
+        <use
+           x="0"
+           y="0"
+           xlink:href="#gridSpar"
+           id="use852"
+           transform="matrix(1.1479451,1.1479451,-0.70710678,0.70710678,-584.30303,-298.7761)"
+           width="100%"
+           height="100%"
+           style="stroke-width:0.77112126;fill:#f0f0f0;fill-opacity:1" />
+        <use
+           style="stroke-width:0.77112126;fill:#f0f0f0;fill-opacity:1"
+           height="100%"
+           width="100%"
+           transform="matrix(1.1479451,-1.1479451,-0.70710678,-0.70710678,-584.30303,-137.27138)"
+           id="use860"
+           xlink:href="#gridSpar"
+           y="0"
+           x="0" />
+      </g>
+      <g
+         style="stroke:#4c4c4c;stroke-width:1.96503699;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill:#f0f0f0;fill-opacity:1"
+         inkscape:label="gridSpar"
+         id="gridSpar">
+        <rect
+           style="opacity:1;vector-effect:none;fill:#f0f0f0;fill-opacity:1;stroke:#4c4c4c;stroke-width:1.96503699;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect815"
+           width="1024"
+           height="20"
+           x="0"
+           y="-727" />
+      </g>
+      <use
+         height="100%"
+         width="100%"
+         transform="translate(0,1004)"
+         id="use839"
+         xlink:href="#gridSpar"
+         y="0"
+         x="0"
+         style="stroke-width:0.98251849;fill:#f0f0f0;fill-opacity:1" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#gridSpar"
+         id="use841"
+         transform="rotate(90,10,-717)"
+         width="100%"
+         height="100%"
+         style="stroke-width:0.98251849;fill:#f0f0f0;fill-opacity:1" />
+      <use
+         height="100%"
+         width="100%"
+         transform="rotate(90,512,-215)"
+         id="use854"
+         xlink:href="#gridSpar"
+         y="0"
+         x="0"
+         style="stroke-width:0.98251849;fill:#f0f0f0;fill-opacity:1" />
+      <g
+         id="g900"
+         style="fill:#4b4b4b;fill-opacity:1">
+        <rect
+           y="-20"
+           x="-727"
+           height="20"
+           width="20"
+           id="rect845"
+           style="opacity:1;vector-effect:none;fill:#4b4b4b;fill-opacity:1;stroke:#818181;stroke-width:0.27462229;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           transform="rotate(90)" />
+        <rect
+           transform="rotate(90)"
+           style="opacity:1;vector-effect:none;fill:#4b4b4b;fill-opacity:1;stroke:#818181;stroke-width:0.27462229;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect850"
+           width="20"
+           height="20"
+           x="277"
+           y="-20" />
+        <rect
+           transform="rotate(90)"
+           style="opacity:1;vector-effect:none;fill:#4b4b4b;fill-opacity:1;stroke:#818181;stroke-width:0.27462229;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect856"
+           width="20"
+           height="20"
+           x="-727"
+           y="-1024" />
+        <rect
+           y="-1024"
+           x="277"
+           height="20"
+           width="20"
+           id="rect858"
+           style="opacity:1;vector-effect:none;fill:#4b4b4b;fill-opacity:1;stroke:#818181;stroke-width:0.27462229;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           transform="rotate(90)" />
+      </g>
+    </g>
+  </g>
+</svg>

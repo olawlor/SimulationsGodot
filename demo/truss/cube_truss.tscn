@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=4 uid="uid://duub5owm54jo3"]
+
+[ext_resource type="Texture2D" uid="uid://dphic16lp3gx0" path="res://truss/grid.png" id="1_uyria"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pv6g"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.4
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a6fgc"]
+_surfaces = [{
+"aabb": AABB(-0.4995, -0.4995, -0.4995, 0.999, 0.999, 0.999),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAAGAAIAAAAEAAYAAwAGAAcAAwACAAYABwAEAAUABwAGAAQABQADAAcABQABAAMAAQACAAMAAQAAAAIABQAAAAEABQAEAAAACAAOAAwACAAKAA4ACwAOAAoACwAPAA4ADwAMAA4ADwANAAwADQALAAkADQAPAAsACQAKAAgACQALAAoADQAIAAwADQAJAAgA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("3v/e/yAAAADe/yAAIAAAAN7/3v/e/wAA3v8gAN7/AAAgAN7/IAAAACAAIAAgAAAAIADe/97/AAAgACAA3v8AAP////8AAAAA//8AAAAAAAD///////8AAP//AAD//wAAAAD//wAAAAAAAAAAAAAAAAAA/////wAAAAAAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i22x1"]
+resource_name = "cube_double_sided_CubeDoubleSided"
+_surfaces = [{
+"aabb": AABB(-0.4995, -0.4995, -0.4995, 0.999, 0.999, 0.999),
+"attribute_data": PackedByteArray("/7+pqv+/qar/v6mq/3+pqv9/qar/f6mq/7//f/+//3//v/9//3//f/9//3//f/9///+pqv+/VNX/v1TV/39U1f8/qar/f1TV////f/+/VFX/v////39UVf8//3//f////7+pqv+/qar/v6mq/3+pqv9/qar/f6mq/7//f/+//3//v/9//3//f/9//3//f/9//79U1f+/VNX//6mq/39U1f8/qar/f1TV/7////+/VFX///9//3////8//3//f1RV"),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AQASAAcAAQAMABIACgATABUACgAIABMAFwAOABEAFwAUAA4AEAALABYAEAAFAAsAAwAGAAkAAwAAAAYADwACAAQADwANAAIAGQAsACYAGQAfACwAIgArAB4AIgAvACsALQAkACoALQAnACQAKAAhABsAKAAuACEAHQAgABoAHQAjACAAKQAYACUAKQAcABgA"),
+"material": SubResource("StandardMaterial3D_5pv6g"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(4, 6, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("3v/e/yAAqire/97/IAAAAN7/3v8gAP8/3v8gACAAqire/yAAIAD/P97/IAAgAP8/3v/e/97/qire/97/3v8AAN7/3v/e/wAA3v8gAN7/qire/yAA3v8AAN7/IADe//8/IADe/yAAAAAgAN7/IAD/PyAA3v8gAKoqIAAgACAA/z8gACAAIAD/PyAAIAAgAKoqIADe/97/AAAgAN7/3v8AACAA3v/e/6oqIAAgAN7/AAAgACAA3v//PyAAIADe/6oq/////wAA////////AAD///////8AAFTV//8AAAAA/7///wAAAAD/////AAAAAFTV/////////7///////////////////1TV//8AAP///7///wAA////v///AAD//1TVAAD//wAAVNUAAP//AAD//wAA//8AAP//AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD/////VNUAAP//////vwAA////////AAAAAP//VNUAAAAA////vwAAAAD///+/VNVU1f9//z//////VNVU1f////////9/VNVU1f9//z//v/+/VNVU1f+//7////9//3//P/////+qKqoq/////////3+qKqoq/3//P/+//7+qKqoq/7//v////3+qKqoq/7//v/9//7+qKqoqAAD/f/+//7+qKqoq//////9//7+qKqoqAAD/f/////+qKqoqVNVU1f+//7//f/+/VNVU1QAA/3//v/+/VNVU1f//////f/+/VNVU1QAA/3//////")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_a6fgc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v68x2"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_uyria")
+
+[node name="cube_double_sided" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93386, 0)
+
+[node name="CubeDoubleSided" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_i22x1")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_v68x2")
