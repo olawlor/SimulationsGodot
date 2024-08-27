@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://brln0ssq16q4o"]
+[gd_scene load_steps=5 format=3 uid="uid://brln0ssq16q4o"]
 
 [ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="1_qtfi8"]
-[ext_resource type="PackedScene" uid="uid://ck0mil0c25ynp" path="res://meshes/rock_lump2.glb" id="2_a8o3b"]
 [ext_resource type="PackedScene" uid="uid://0ucst011xibl" path="res://truss/cube3_truss.tscn" id="3_ygcqy"]
 [ext_resource type="PackedScene" uid="uid://duka2pb4lj22p" path="res://truss/armpivot.glb" id="4_0asfe"]
 
@@ -19,9 +18,6 @@ shadow_enabled = true
 
 [node name="AsteroidEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8noi")
-
-[node name="rock_lump2" parent="." instance=ExtResource("2_a8o3b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271482, 0)
 
 [node name="rock_lump1" parent="." instance=ExtResource("1_qtfi8")]
 transform = Transform3D(5.04609, 0, 0, 0, 5.04609, 0, 0, 0, 5.04609, 0, -1.99466, 0)
