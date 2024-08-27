@@ -16,4 +16,4 @@ func _process(delta: float) -> void:
 	if (Input.is_physical_key_pressed(keydn)):
 		command = -1.0
 	angle += command * rate * delta
-	transform.basis = Basis(axis,angle * PI / 180.0)
+	transform.basis = Basis(axis,deg_to_rad(angle))
