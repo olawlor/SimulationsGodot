@@ -1,20 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://brln0ssq16q4o"]
+[gd_scene load_steps=12 format=3 uid="uid://brln0ssq16q4o"]
 
 [ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="1_qtfi8"]
 [ext_resource type="PackedScene" uid="uid://0ucst011xibl" path="res://truss/cube3_truss.tscn" id="3_ygcqy"]
 [ext_resource type="PackedScene" uid="uid://duka2pb4lj22p" path="res://truss/armpivot.glb" id="4_0asfe"]
 [ext_resource type="PackedScene" uid="uid://ck0mil0c25ynp" path="res://meshes/rock_lump2.glb" id="4_apg6v"]
+[ext_resource type="Script" path="res://scripts/angle_rotate_keyboard.gd" id="5_3l4wv"]
+[ext_resource type="PackedScene" uid="uid://68vvckiqb3nu" path="res://meshes/lawlorhead_10k.glb" id="5_drb6b"]
+[ext_resource type="PackedScene" uid="uid://c7fiwa53res24" path="res://meshes/Axes3D.gltf" id="6_xhtm1"]
+[ext_resource type="Script" path="res://scripts/tween_animate_demo.gd" id="8_sr1bs"]
 
 [sub_resource type="Environment" id="Environment_w8noi"]
 background_energy_multiplier = 0.05
 
+[sub_resource type="SphereMesh" id="SphereMesh_cq80x"]
+radius = 0.15
+height = 0.3
+radial_segments = 6
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwrno"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.8, 0.286275, 0, 1)
+emission_energy_multiplier = 0.65
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.948169, 0.317768, 0, -0.317768, 0.948168, 0, 1.33074, 4.13565)
+transform = Transform3D(1, 0, 0, 0, 0.948169, 0.317768, 0, -0.317768, 0.948169, 0.049242, 1.33074, 3.1884)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.80478, 0.156738, -0.572506, 0.337833, 0.6721, 0.658901, 0.488056, -0.723681, 0.487942, -1.18414, 3.62911, -1.3364)
+light_energy = 5.364
 shadow_enabled = true
 
 [node name="AsteroidEnvironment" type="WorldEnvironment" parent="."]
@@ -24,9 +41,29 @@ environment = SubResource("Environment_w8noi")
 transform = Transform3D(5.04609, 0, 0, 0, 5.04609, 0, 0, 0, 5.04609, 0, -1.99466, 0)
 
 [node name="cube3_truss" parent="." instance=ExtResource("3_ygcqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1168, -1.07056, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7007, -1.07056, 0)
 
 [node name="armpivot" parent="." instance=ExtResource("4_0asfe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12352, 2.42784, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69398, 2.42784, 0)
 
 [node name="rock_lump2" parent="." instance=ExtResource("4_apg6v")]
+
+[node name="transform_demo" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859065, 0)
+script = ExtResource("5_3l4wv")
+axis = Vector3(0, 1, 0)
+keyup = 65
+keydn = 68
+
+[node name="lawlorhead_10k2" parent="transform_demo" instance=ExtResource("5_drb6b")]
+transform = Transform3D(7.1663, 0, 0, 0, 7.1663, 0, 0, 0, 7.1663, 0, 0, 0)
+
+[node name="Axes3D" parent="transform_demo" instance=ExtResource("6_xhtm1")]
+transform = Transform3D(1.09877, 0, 0, 0, 1.31711, 0, 0, 0, 1.31646, 0, 0, 0)
+
+[node name="tween_animate_demo" type="Node3D" parent="transform_demo"]
+script = ExtResource("8_sr1bs")
+
+[node name="Exhaust" type="MeshInstance3D" parent="transform_demo/tween_animate_demo"]
+mesh = SubResource("SphereMesh_cq80x")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwrno")
