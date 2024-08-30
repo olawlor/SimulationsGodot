@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc3t1e3yow84c"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cq80x"]
+radius = 0.15
+height = 0.3
+radial_segments = 6
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwrno"]
+transparency = 1
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 0.658824)
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.8, 0.286275, 0, 1)
+emission_energy_multiplier = 3.06
+grow = true
+
+[node name="Exhaust" type="MeshInstance3D"]
+transform = Transform3D(2.68094, 0, 0, 0, 2.89797, 0, 0, 0, 2.53866, 0, 0, 0)
+rotation_edit_mode = 2
+mesh = SubResource("SphereMesh_cq80x")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwrno")
