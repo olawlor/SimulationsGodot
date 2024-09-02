@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxed4ji0bcne5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_441qm"]
+size = Vector3(5, 0.3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsax4"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(1, 0.0784314, 0.0745098, 1)
+emission_energy_multiplier = 9.26
+disable_receive_shadows = true
+
+[node name="laser_inflight" type="MeshInstance3D"]
+cast_shadow = 0
+mesh = SubResource("BoxMesh_441qm")
+surface_material_override/0 = SubResource("StandardMaterial3D_tsax4")
