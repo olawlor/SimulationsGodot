@@ -9,7 +9,7 @@ func _process(_delta: float) -> void:
 	if (Input.is_physical_key_pressed(KEY_D)):
 		ad = +1
 	
-	var ws : float = 0 # W-S axid (up-down)
+	var ws : float = 0 # W-S axis (up-down)
 	if (Input.is_physical_key_pressed(KEY_W)):
 		ws = +1
 	if (Input.is_physical_key_pressed(KEY_S)):
