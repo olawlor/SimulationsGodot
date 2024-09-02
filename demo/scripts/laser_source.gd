@@ -3,7 +3,7 @@ extends Node3D
 @onready var laser_pool : Node3D = $"../../laser_pool"
 @onready var laser_scene : PackedScene = preload("res:///meshes/laser_inflight.tscn") 
 
-var spawntime : float = 0.05 # spawn new exhaust this often
+var spawntime : float = 0.05 # spawn new bolt this often
 var elapsed : float = spawntime   # total animation run time in seconds
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,5 +36,5 @@ func _process(delta: float) -> void:
 
 		# Fire new object toward this target
 		var tween = get_tree().create_tween()   # animate toward target
-		tween.tween_property(n, "global_position", target, 1.0)
+		tween.tween_property(n, "global_position", target, 1.5)
 		tween.chain().tween_callback(n.queue_free)

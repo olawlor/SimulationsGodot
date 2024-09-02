@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgjgn8ochrn1o"]
+
+[ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="1_xt6np"]
+[ext_resource type="PackedScene" uid="uid://0ucst011xibl" path="res://truss/cube3_truss.tscn" id="2_vq1cc"]
+[ext_resource type="PackedScene" uid="uid://duka2pb4lj22p" path="res://truss/armpivot.glb" id="3_nr1ib"]
+[ext_resource type="PackedScene" uid="uid://ck0mil0c25ynp" path="res://meshes/rock_lump2.glb" id="4_bbmxd"]
+[ext_resource type="PackedScene" uid="uid://ly55kdc81rkd" path="res://meshes/lawlorhead_rocket.tscn" id="5_awb4g"]
+[ext_resource type="Script" path="res://scripts/camera_dolly.gd" id="10_h2dv7"]
+
+[sub_resource type="Environment" id="Environment_w8noi"]
+background_energy_multiplier = 0.05
+glow_enabled = true
+glow_intensity = 1.04
+glow_hdr_scale = 2.08
+glow_hdr_luminance_cap = 14.51
+
+[sub_resource type="SphereMesh" id="SphereMesh_8djh2"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.213751, 0.641123, 0.73707, -0.968845, 0.0425025, 0.243995, 0.125103, -0.76626, 0.630233, -1.18414, 3.62911, -1.3364)
+light_energy = 5.364
+shadow_enabled = true
+
+[node name="AsteroidEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w8noi")
+
+[node name="rock_lump1_big" parent="." instance=ExtResource("1_xt6np")]
+transform = Transform3D(5.04609, 0, 0, 0, 5.04609, 0, 0, 0, 5.04609, -2.2876, -3.38304, 0)
+
+[node name="rock_lump1_giant" parent="." instance=ExtResource("1_xt6np")]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, -500)
+
+[node name="cube3_truss" parent="." instance=ExtResource("2_vq1cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16361, -2.45894, 0)
+
+[node name="armpivot" parent="." instance=ExtResource("3_nr1ib")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.15689, 1.03946, 0)
+
+[node name="rock_lump2" parent="." instance=ExtResource("4_bbmxd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2876, -1.38838, 0)
+
+[node name="lawlorhead0" parent="." instance=ExtResource("5_awb4g")]
+
+[node name="lawlorhead1" parent="." instance=ExtResource("5_awb4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81247, 0.859, 0)
+
+[node name="Axes3D" parent="lawlorhead1" index="0"]
+transform = Transform3D(0.0311587, 0, -1.31593, 0, 1.31711, 0, 1.09833, 0, 0.0373319, 0, 0, 0)
+visible = false
+
+[node name="hat" type="MeshInstance3D" parent="lawlorhead1"]
+transform = Transform3D(1.393, 0, 0, 0, 1.393, 0, 0, 0, 1.393, 0, 0.379523, 0)
+mesh = SubResource("SphereMesh_8djh2")
+
+[node name="lawlorhead2" parent="." instance=ExtResource("5_awb4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49795, 0.859, 0)
+
+[node name="Axes3D" parent="lawlorhead2" index="0"]
+visible = false
+
+[node name="exhaust_pool" type="Node3D" parent="."]
+
+[node name="laser_pool" type="Node3D" parent="."]
+
+[node name="camera_dolly" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("10_h2dv7")
+track = NodePath("../lawlorhead0")
+offset = Vector3(0, -5, 2)
+
+[node name="Camera3D" type="Camera3D" parent="camera_dolly"]
+transform = Transform3D(1, 0, 0, 0, 0.273069, -0.961994, 0, 0.961994, 0.273069, 0.049, 0, 0)
+
+[editable path="lawlorhead1"]
+[editable path="lawlorhead2"]

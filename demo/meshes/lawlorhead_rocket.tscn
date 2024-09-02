@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ly55kdc81rkd"]
+
+[ext_resource type="Script" path="res://scripts/rocket_flight_WASD.gd" id="1_ub3on"]
+[ext_resource type="PackedScene" uid="uid://c7fiwa53res24" path="res://meshes/Axes3D.gltf" id="2_mtonl"]
+[ext_resource type="PackedScene" uid="uid://68vvckiqb3nu" path="res://meshes/lawlorhead_10k.glb" id="3_4pfnl"]
+[ext_resource type="Script" path="res://scripts/rocket_exhaust_demo.gd" id="4_urorh"]
+[ext_resource type="Script" path="res://scripts/laser_source.gd" id="5_8vjn6"]
+
+[node name="rocket_steering" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859, 0)
+rotation_edit_mode = 1
+script = ExtResource("1_ub3on")
+
+[node name="Axes3D" parent="." instance=ExtResource("2_mtonl")]
+transform = Transform3D(1.09877, 0, 0, 0, 1.31711, 0, 0, 0, 1.31646, 0, 0, 0)
+
+[node name="lawlorhead_10k2" parent="." instance=ExtResource("3_4pfnl")]
+transform = Transform3D(6.87941, 0, 0, 0, 6.87941, 0, 0, 0, 6.87941, 0, 0, 0)
+
+[node name="exhaust_source" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.740952, 0)
+script = ExtResource("4_urorh")
+
+[node name="laser_source" type="Node3D" parent="."]
+script = ExtResource("5_8vjn6")
