@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var laser_pool : Node3D = $"../../laser_pool"
+@onready var laser_pool : Node3D = $"/root/space/laser_pool"
 @onready var laser_scene : PackedScene = preload("res:///meshes/laser_inflight.tscn") 
 
 var spawntime : float = 0.05 # spawn new bolt this often

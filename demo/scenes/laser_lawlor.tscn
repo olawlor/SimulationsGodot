@@ -17,7 +17,7 @@ glow_intensity = 1.04
 glow_hdr_scale = 2.08
 glow_hdr_luminance_cap = 14.51
 
-[node name="Node3D" type="Node3D"]
+[node name="space" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.213751, 0.641123, 0.73707, -0.968845, 0.0425025, 0.243995, 0.125103, -0.76626, 0.630233, -1.18414, 3.62911, -1.3364)

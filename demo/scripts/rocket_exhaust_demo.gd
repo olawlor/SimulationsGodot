@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var exhaust_pool : Node3D = $"../../exhaust_pool"
+@onready var exhaust_pool : Node3D = $"/root/space/exhaust_pool"
 @onready var exhaust_scene : PackedScene = preload("res:///meshes/exhaust.tscn")   # we'll fire out copies of this object
 
 var spawntime : float = 0.05 # spawn new exhaust this often
