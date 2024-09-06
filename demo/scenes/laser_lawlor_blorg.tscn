@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgjgn8ochrn1o"]
+[gd_scene load_steps=8 format=3 uid="uid://cpef8nbl765tc"]
 
-[ext_resource type="PackedScene" uid="uid://cx8sap6ux3wo3" path="res://meshes/asteroid_base.tscn" id="1_8ixmx"]
-[ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="1_xt6np"]
-[ext_resource type="PackedScene" uid="uid://ly55kdc81rkd" path="res://meshes/lawlorhead_rocket.tscn" id="5_awb4g"]
-[ext_resource type="Script" path="res://scripts/camera_dolly.gd" id="10_h2dv7"]
+[ext_resource type="PackedScene" uid="uid://cx8sap6ux3wo3" path="res://meshes/asteroid_base.tscn" id="1_yctfx"]
+[ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="2_2lpcu"]
+[ext_resource type="PackedScene" uid="uid://ly55kdc81rkd" path="res://meshes/lawlorhead_rocket.tscn" id="3_co4i0"]
+[ext_resource type="Script" path="res://scripts/camera_dolly.gd" id="4_1kd0r"]
+[ext_resource type="PackedScene" uid="uid://cud7gk54o7duk" path="res://meshes/blorgcube.tscn" id="5_uganf"]
 
 [sub_resource type="Environment" id="Environment_w8noi"]
 background_energy_multiplier = 0.05
@@ -24,20 +25,20 @@ shadow_enabled = true
 [node name="AsteroidEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w8noi")
 
-[node name="asteroid_base" parent="." instance=ExtResource("1_8ixmx")]
+[node name="asteroid_base" parent="." instance=ExtResource("1_yctfx")]
 
-[node name="asteroid_base2" parent="." instance=ExtResource("1_8ixmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91815, 0, 0)
+[node name="asteroid_base2" parent="." instance=ExtResource("1_yctfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99926, 0, 0)
 
-[node name="asteroid_base3" parent="." instance=ExtResource("1_8ixmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.48885, 0, 0)
+[node name="asteroid_base3" parent="." instance=ExtResource("1_yctfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68067, 0, 0)
 
-[node name="rock_lump1_giant" parent="." instance=ExtResource("1_xt6np")]
+[node name="rock_lump1_giant" parent="." instance=ExtResource("2_2lpcu")]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, -500)
 
-[node name="lawlorhead0" parent="." instance=ExtResource("5_awb4g")]
+[node name="lawlorhead0" parent="." instance=ExtResource("3_co4i0")]
 
-[node name="lawlorhead1" parent="." instance=ExtResource("5_awb4g")]
+[node name="lawlorhead1" parent="." instance=ExtResource("3_co4i0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81247, 0.859, 0)
 
 [node name="Axes3D" parent="lawlorhead1" index="0"]
@@ -48,7 +49,7 @@ visible = false
 transform = Transform3D(1.393, 0, 0, 0, 1.393, 0, 0, 0, 1.393, 0, 0.379523, 0)
 mesh = SubResource("SphereMesh_8djh2")
 
-[node name="lawlorhead2" parent="." instance=ExtResource("5_awb4g")]
+[node name="lawlorhead2" parent="." instance=ExtResource("3_co4i0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49795, 0.859, 0)
 
 [node name="Axes3D" parent="lawlorhead2" index="0"]
@@ -59,12 +60,18 @@ visible = false
 [node name="laser_pool" type="Node3D" parent="."]
 
 [node name="camera_dolly" type="Node3D" parent="." node_paths=PackedStringArray("track")]
-script = ExtResource("10_h2dv7")
-track = NodePath("../lawlorhead0")
+script = ExtResource("4_1kd0r")
+track = NodePath("../lawlorhead1")
 offset = Vector3(0, -5, 2)
 
 [node name="Camera3D" type="Camera3D" parent="camera_dolly"]
 transform = Transform3D(1, 0, 0, 0, 0.273069, -0.961994, 0, 0.961994, 0.273069, 0.049, 0, 0)
+
+[node name="blorgcube" parent="." instance=ExtResource("5_uganf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 63.5529, 0)
+
+[node name="blorgcube2" parent="." instance=ExtResource("5_uganf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.7984, 72.6925, 2.99004)
 
 [editable path="lawlorhead1"]
 [editable path="lawlorhead2"]

@@ -26,8 +26,7 @@ func _process(delta: float) -> void:
 		var target : Vector3 = global_position + 2*dir
 
 		# Fire an exhaust object toward this target
-		var material = exhaust.get_surface_override_material(0).duplicate()
-		exhaust.set_surface_override_material(0,material)
+		var material = exhaust.get_surface_override_material(0)
 		var tween = get_tree().create_tween()   # animate toward target
 		tween.set_parallel(true)  # move and change emission at same time
 		tween.tween_property(exhaust, "global_position", target, duration)

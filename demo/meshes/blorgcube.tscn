@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://cud7gk54o7duk"]
+
+[ext_resource type="Script" path="res://scripts/blorgcube.gd" id="1_3j85h"]
+[ext_resource type="Texture2D" uid="uid://3qd133uipwmi" path="res://textures/circuit_board.png" id="2_17iyj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7ei85"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1stpu"]
+resource_local_to_scene = true
+albedo_color = Color(0.224304, 0.224304, 0.224304, 1)
+emission_enabled = true
+emission = Color(0, 0.0941176, 0.176471, 1)
+emission_energy_multiplier = 0.83
+emission_texture = ExtResource("2_17iyj")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b552e"]
+
+[node name="blorgcube" type="Node3D"]
+script = ExtResource("1_3j85h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7ei85")
+surface_material_override/0 = SubResource("StandardMaterial3D_1stpu")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_b552e")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

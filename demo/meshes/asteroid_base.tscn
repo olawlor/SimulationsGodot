@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx8sap6ux3wo3"]
+
+[ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="1_75xyt"]
+[ext_resource type="PackedScene" uid="uid://0ucst011xibl" path="res://truss/cube3_truss.tscn" id="2_sknjb"]
+[ext_resource type="PackedScene" uid="uid://duka2pb4lj22p" path="res://truss/armpivot.glb" id="3_4dlku"]
+[ext_resource type="PackedScene" uid="uid://ck0mil0c25ynp" path="res://meshes/rock_lump2.glb" id="4_ua6oi"]
+
+[node name="asteroid_base" type="Node3D"]
+
+[node name="rock_lump1_big" parent="." instance=ExtResource("1_75xyt")]
+transform = Transform3D(5.04609, 0, 0, 0, 5.04609, 0, 0, 0, 5.04609, -2.2876, -3.38304, -1.38469)
+
+[node name="cube3_truss" parent="." instance=ExtResource("2_sknjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16361, -2.45894, 0)
+
+[node name="armpivot" parent="." instance=ExtResource("3_4dlku")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.15689, 1.03946, 0)
+
+[node name="rock_lump2" parent="." instance=ExtResource("4_ua6oi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2876, -1.26757, -0.534753)
+
+[node name="rock_lump3" parent="." instance=ExtResource("4_ua6oi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.470026, -2.00971, -0.496357)

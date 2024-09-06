@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="res://scenes/laser_lawlor_tracker.tscn"
+run/main_scene="res://scenes/laser_lawlor_blorg.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ExplosionManager="*res://scripts/explosion_manager.gd"
 
 [input]
 

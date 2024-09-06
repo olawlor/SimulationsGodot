@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxed4ji0bcne5"]
+[gd_scene load_steps=4 format=3 uid="uid://dxed4ji0bcne5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_441qm"]
 size = Vector3(3, 0.3, 0.3)
@@ -11,7 +11,15 @@ emission = Color(1, 0.0784314, 0.0745098, 1)
 emission_energy_multiplier = 9.26
 disable_receive_shadows = true
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6lakl"]
+points = PackedVector3Array(1.5, 0.15, 0.15, 1.5, 0.15, -0.15, -1.5, 0.15, 0.15, 1.5, -0.15, 0.15, 1.5, -0.15, -0.15, -1.5, 0.15, -0.15, -1.5, -0.15, 0.15, -1.5, -0.15, -0.15)
+
 [node name="laser_inflight" type="MeshInstance3D"]
 cast_shadow = 0
 mesh = SubResource("BoxMesh_441qm")
 surface_material_override/0 = SubResource("StandardMaterial3D_tsax4")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("ConvexPolygonShape3D_6lakl")

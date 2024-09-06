@@ -7,6 +7,7 @@ radial_segments = 6
 rings = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwrno"]
+resource_local_to_scene = true
 transparency = 1
 specular_mode = 2
 albedo_color = Color(0, 0, 0, 0.658824)
