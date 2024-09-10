@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://ssbtdq5qgrkv"]
+
+[ext_resource type="Shader" path="res://shaders/deform_world_coords.gdshader" id="1_74aec"]
+[ext_resource type="Script" path="res://shaders/explode_script.gd" id="2_qhu6x"]
+[ext_resource type="PackedScene" uid="uid://68vvckiqb3nu" path="res://meshes/lawlorhead_10k.glb" id="3_qgpux"]
+[ext_resource type="PackedScene" uid="uid://kwibtq67egdk" path="res://meshes/explode.glb" id="4_5ndfd"]
+[ext_resource type="Shader" path="res://shaders/explode_shader.gdshader" id="5_pwwti"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dny8e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6mis"]
+render_priority = 0
+shader = ExtResource("1_74aec")
+shader_parameter/ripple_control = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0joe"]
+render_priority = 0
+shader = ExtResource("1_74aec")
+shader_parameter/ripple_control = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1qaq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_74aec")
+shader_parameter/ripple_control = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7opyv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_74aec")
+shader_parameter/ripple_control = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxocg"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_pwwti")
+shader_parameter/size = 1.74761
+shader_parameter/bright = 1.21388
+shader_parameter/spikyN = 0.0623806
+shader_parameter/spikyC = 0.0
+shader_parameter/color = Color(1, 0.6, 0.4, 1)
+
+[node name="Shadertest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999876, -0.0157597, 0, 0.0157597, 0.999876, -1.50999, 1.0607, 1.65761)
+mesh = SubResource("CapsuleMesh_dny8e")
+surface_material_override/0 = SubResource("ShaderMaterial_e6mis")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.270584, -0.223986, 0.936277, 0, 0.972557, 0.232665, -0.962696, -0.0629554, 0.263158, 4.10788, 1.69897, 1.33936)
+
+[node name="lawlorhead_10k2" parent="." instance=ExtResource("3_qgpux")]
+transform = Transform3D(6.97997, 0, 0, 0, 6.97997, 0, 0, 0, 6.97997, -1.91307, 0.888728, 0)
+
+[node name="lawlorhead_10k" parent="lawlorhead_10k2" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_y0joe")
+
+[node name="lawlorhead_10k3" parent="." instance=ExtResource("3_qgpux")]
+transform = Transform3D(6.97997, 0, 0, 0, 6.97997, 0, 0, 0, 6.97997, -1.98227, 0.888728, -1.64778)
+
+[node name="lawlorhead_10k" parent="lawlorhead_10k3" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_s1qaq")
+
+[node name="lawlorhead_10k4" parent="." instance=ExtResource("3_qgpux")]
+transform = Transform3D(6.97997, 0, 0, 0, 6.97997, 0, 0, 0, 6.97997, -1.98227, 0.888728, -3.18899)
+
+[node name="lawlorhead_10k" parent="lawlorhead_10k4" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_7opyv")
+
+[node name="explode" parent="." instance=ExtResource("4_5ndfd")]
+script = ExtResource("2_qhu6x")
+
+[node name="Explode" parent="explode" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_oxocg")
+
+[editable path="lawlorhead_10k2"]
+[editable path="lawlorhead_10k3"]
+[editable path="lawlorhead_10k4"]
+[editable path="explode"]
