@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgjkoh7m72s7p"]
+
+[ext_resource type="Shader" path="res://textures/circuitworld_demo.gdshader" id="1_b57gj"]
+[ext_resource type="Texture2D" uid="uid://3qd133uipwmi" path="res://textures/circuit_board.png" id="2_aqmos"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rag5p"]
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slphi"]
+render_priority = 0
+shader = ExtResource("1_b57gj")
+shader_parameter/circuit = ExtResource("2_aqmos")
+
+[node name="Circuitworld" type="Node3D"]
+
+[node name="circuitplane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_rag5p")
+surface_material_override/0 = SubResource("ShaderMaterial_slphi")
+
+[node name="closeup" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 500, -499, 0)
+mesh = SubResource("PlaneMesh_rag5p")
+surface_material_override/0 = SubResource("ShaderMaterial_slphi")
