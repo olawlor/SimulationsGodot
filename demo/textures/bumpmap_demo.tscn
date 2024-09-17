@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://whbssmyqgtnw"]
+
+[ext_resource type="Texture2D" uid="uid://coapvqxh4w4t1" path="res://textures/bumpmap_perlin_normals.jpg" id="1_a8aoj"]
+[ext_resource type="Script" path="res://textures/bumpmap_slowspin.gd" id="2_0k1xh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kixst"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxiad"]
+normal_enabled = true
+normal_texture = ExtResource("1_a8aoj")
+uv1_scale = Vector3(4, 4, 4)
+
+[node name="BumpmapDemo" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.859246, 0.0317916, 0.510574, -0.511142, 0.0128654, 0.8594, 0.020753, -0.999412, 0.0273045, -0.004, 1.72971, 0)
+
+[node name="TexturedMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.610744, 0, -0.791828, 0, 1, 0, 0.791828, 0, -0.610744, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_kixst")
+surface_material_override/0 = SubResource("StandardMaterial3D_pxiad")
+script = ExtResource("2_0k1xh")
