@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://2m4vefn0v8iy"]
+
+[ext_resource type="Shader" path="res://shaders/shader_lighting_shader_blinn_phong_ish.gdshader" id="1_k3qt3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_k3qt3")
+shader_parameter/light_direction = Vector3(0, 1, 1.5)

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5upoffugjo4t"]
+
+[ext_resource type="Material" uid="uid://2m4vefn0v8iy" path="res://shaders/shader_lighting_material.tres" id="2_txfny"]
+[ext_resource type="PackedScene" uid="uid://68vvckiqb3nu" path="res://meshes/lawlorhead_10k.glb" id="3_tgbud"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8mgxp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5oyta"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_klk2l"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ef4ru"]
+albedo_color = Color(0.244, 0.345399, 0.242293, 1)
+
+[node name="ShaderLightingDemo" type="Node3D"]
+
+[node name="cube" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8mgxp")
+surface_material_override/0 = ExtResource("2_txfny")
+
+[node name="capsule" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.902158, 0.339507, -1.42876)
+material_override = ExtResource("2_txfny")
+mesh = SubResource("CapsuleMesh_5oyta")
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.519051, 0)
+mesh = SubResource("PlaneMesh_klk2l")
+surface_material_override/0 = SubResource("StandardMaterial3D_ef4ru")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.729915, -0.180712, -0.659217, -0.320932, -0.760905, 0.563938, -0.603512, 0.623191, 0.497399, 0.493739, 2.74002, 0)
+visible = false
+light_color = Color(0.782957, 0.744318, 0.724344, 1)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="lawlorhead_10k2" parent="." instance=ExtResource("3_tgbud")]
+transform = Transform3D(4.55446, 0, -5.46934, 0, 7.11736, 0, 5.46934, 0, 4.55446, -2.25023, 0.436937, 0)
+
+[node name="lawlorhead_10k" parent="lawlorhead_10k2" index="0"]
+material_override = ExtResource("2_txfny")
+
+[editable path="lawlorhead_10k2"]
