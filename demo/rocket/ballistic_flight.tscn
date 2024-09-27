@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsisgieja72n0"]
+
+[ext_resource type="PackedScene" uid="uid://cx8sap6ux3wo3" path="res://meshes/asteroid_base.tscn" id="1_fe3lo"]
+[ext_resource type="PackedScene" uid="uid://chj60r0ik37st" path="res://meshes/rock_lump1.glb" id="2_jfp73"]
+[ext_resource type="PackedScene" uid="uid://c6kjd4t3ueg8t" path="res://rocket/scifi_rocket.tscn" id="3_nh0xt"]
+[ext_resource type="Script" path="res://rocket/ballistic_flight_WASD.gd" id="4_gumfl"]
+[ext_resource type="Script" path="res://scripts/rocket_exhaust_demo.gd" id="5_6kl04"]
+[ext_resource type="Script" path="res://scripts/laser_source.gd" id="6_61xe2"]
+[ext_resource type="PackedScene" uid="uid://68vvckiqb3nu" path="res://meshes/lawlorhead_10k.glb" id="7_2uybc"]
+[ext_resource type="Script" path="res://scripts/camera_dolly.gd" id="8_upfx3"]
+[ext_resource type="PackedScene" uid="uid://cud7gk54o7duk" path="res://meshes/blorgcube.tscn" id="9_h0jra"]
+
+[sub_resource type="Environment" id="Environment_w8noi"]
+background_energy_multiplier = 0.05
+glow_enabled = true
+glow_intensity = 1.04
+glow_hdr_scale = 2.08
+glow_hdr_luminance_cap = 14.51
+
+[node name="space" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.213751, 0.641123, 0.73707, -0.968845, 0.0425025, 0.243995, 0.125103, -0.76626, 0.630233, -1.18414, 3.62911, -1.3364)
+light_energy = 5.364
+shadow_enabled = true
+
+[node name="AsteroidEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w8noi")
+
+[node name="asteroid_base" parent="." instance=ExtResource("1_fe3lo")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.446939, -0.671993, 0)
+
+[node name="heavy_objects" type="Node3D" parent="."]
+
+[node name="rock_lump1_giant" parent="heavy_objects" instance=ExtResource("2_jfp73")]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, -500)
+
+[node name="rock_lump2_distant" parent="heavy_objects" instance=ExtResource("2_jfp73")]
+transform = Transform3D(-128.692, 991.685, 0, -726.051, -94.2203, 681.155, 675.491, 87.6591, 732.139, 2000, 0, -500)
+
+[node name="scifi_rocket" parent="." node_paths=PackedStringArray("heavy_objects") instance=ExtResource("3_nh0xt")]
+script = ExtResource("4_gumfl")
+heavy_objects = NodePath("../heavy_objects")
+
+[node name="exhaust_source" type="Node3D" parent="scifi_rocket"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -3.66944, -0.370476, 7.90757e-15)
+script = ExtResource("5_6kl04")
+
+[node name="laser_R" type="Node3D" parent="scifi_rocket"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1.98965, -0.370476, 1.0995)
+script = ExtResource("6_61xe2")
+
+[node name="laser_L" type="Node3D" parent="scifi_rocket"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1.99, -0.37, -1.099)
+script = ExtResource("6_61xe2")
+
+[node name="lawlorhead_10k2" parent="scifi_rocket" instance=ExtResource("7_2uybc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.35569, 0, 0)
+
+[node name="exhaust_pool" type="Node3D" parent="."]
+
+[node name="laser_pool" type="Node3D" parent="."]
+
+[node name="camera_dolly" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("8_upfx3")
+track = NodePath("../scifi_rocket")
+offset = Vector3(-10, 2, 2)
+rate = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="camera_dolly"]
+transform = Transform3D(-8.74227e-08, 0.273069, -0.961994, 1.39091e-08, 0.961994, 0.273069, 1, 1.0492e-08, -8.78983e-08, -8.68172, 4.32232, 4.71414e-08)
+far = 40000.0
+
+[node name="blorgcube" parent="." instance=ExtResource("9_h0jra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1519, 63.5529, 0)
+
+[node name="blorgcube2" parent="." instance=ExtResource("9_h0jra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.7984, 72.6925, 2.99004)
