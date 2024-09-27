@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 # Handle laser fire
 func _on_area_3d_area_entered(_area: Area3D) -> void:
 	print("Laser fire(?) entered blorg cube!")
-	health -= 0.01
+	health -= 0.02
 	mtl.emission += Color(0.3,0.0,0.0)
 	
 	# Little tiny explosion around the laser hit location
