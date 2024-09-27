@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://uyawvsf62ny5"]
+
+[ext_resource type="Material" uid="uid://b7beg20v3bk2x" path="res://textures/circuitworld_animating.tres" id="1_qa7kb"]
+[ext_resource type="Texture2D" uid="uid://3qd133uipwmi" path="res://textures/circuit_board.png" id="2_7wfr4"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="2_njjq6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_udn1e"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nj2a"]
+albedo_color = Color(0.245984, 0.245984, 0.245984, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dtw4g"]
+material = SubResource("StandardMaterial3D_1nj2a")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bsf3h"]
+subdivide_width = 16
+subdivide_height = 16
+subdivide_depth = 16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_veir8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7u76a"]
+cull_mode = 2
+albedo_texture = ExtResource("2_7wfr4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6w7yc"]
+size = Vector2(3, 3)
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="FabricSceneTest" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_udn1e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_dtw4g")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9277, -0.0535504, -0.369467, 0.373328, 0.13307, 0.918106, 0, -0.989659, 0.143441, -4.00235, 7.47656, 0)
+shadow_enabled = true
+
+[node name="CubeDemo" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08891, 0)
+mass = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CubeDemo"]
+material_override = ExtResource("1_qa7kb")
+mesh = SubResource("BoxMesh_bsf3h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeDemo"]
+shape = SubResource("BoxShape3D_veir8")
+
+[node name="SphereDemo" parent="." instance=ExtResource("2_njjq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.04367)
+
+[node name="SoftBody3D" type="SoftBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9864, 0)
+material_override = SubResource("StandardMaterial3D_7u76a")
+mesh = SubResource("PlaneMesh_6w7yc")
+simulation_precision = 10
+total_mass = 4.01
+damping_coefficient = 0.02

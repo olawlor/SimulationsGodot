@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://b212kb700nanb"]
+
+[ext_resource type="PackedScene" uid="uid://bwi436wllrmlx" path="res://physics/rigidbody/rigidbody_cube_demo.tscn" id="1_oksdg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_udn1e"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nj2a"]
+albedo_color = Color(0.245984, 0.245984, 0.245984, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dtw4g"]
+material = SubResource("StandardMaterial3D_1nj2a")
+size = Vector3(100, 1, 100)
+
+[node name="FabricSceneTest" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_udn1e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_dtw4g")
+
+[node name="CubeDemo" parent="." instance=ExtResource("1_oksdg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02226, 0)
+
+[node name="CubeDemo2" parent="." instance=ExtResource("1_oksdg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.636045, 2.38964, 0.43209)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9277, -0.0535504, -0.369467, 0.373328, 0.13307, 0.918106, 0, -0.989659, 0.143441, -4.00235, 7.47656, 0)
+shadow_enabled = true

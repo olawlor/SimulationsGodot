@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b7beg20v3bk2x"]
+
+[ext_resource type="Shader" path="res://textures/circuitworld_animating.gdshader" id="1_o2k3h"]
+[ext_resource type="Texture2D" uid="uid://3qd133uipwmi" path="res://textures/circuit_board.png" id="2_an6n1"]
+[ext_resource type="Texture2D" uid="uid://d012bag5u6sl2" path="res://textures/export_test.jpg" id="3_mwo6f"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_o2k3h")
+shader_parameter/circuit = ExtResource("2_an6n1")
+shader_parameter/glowblobs = ExtResource("3_mwo6f")

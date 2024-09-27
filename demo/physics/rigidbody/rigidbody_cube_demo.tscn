@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwi436wllrmlx"]
+
+[ext_resource type="Material" uid="uid://b7beg20v3bk2x" path="res://textures/circuitworld_animating.tres" id="1_u0tr0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0sv7d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_veir8"]
+
+[node name="CubeDemo" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mass = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_u0tr0")
+mesh = SubResource("BoxMesh_0sv7d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_veir8")
