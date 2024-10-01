@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b212kb700nanb"]
+[gd_scene load_steps=8 format=3 uid="uid://b212kb700nanb"]
 
 [ext_resource type="PackedScene" uid="uid://bwi436wllrmlx" path="res://physics/rigidbody/rigidbody_cube_demo.tscn" id="1_oksdg"]
+[ext_resource type="Script" path="res://physics/apply_force_WASD.gd" id="2_iy01x"]
+[ext_resource type="Script" path="res://scripts/camera_dolly.gd" id="2_ndbfe"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_nhu67"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udn1e"]
 size = Vector3(100, 1, 100)
@@ -12,25 +16,33 @@ albedo_color = Color(0.245984, 0.245984, 0.245984, 1)
 material = SubResource("StandardMaterial3D_1nj2a")
 size = Vector3(100, 1, 100)
 
-[node name="FabricSceneTest" type="Node3D"]
+[node name="RigidbodySceneTest" type="Node3D"]
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_nhu67")
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground"]
 shape = SubResource("BoxShape3D_udn1e")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
 mesh = SubResource("BoxMesh_dtw4g")
 
-[node name="CubeDemo" parent="." instance=ExtResource("1_oksdg")]
+[node name="CubePassive" parent="." instance=ExtResource("1_oksdg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02226, 0)
 
-[node name="CubeDemo2" parent="." instance=ExtResource("1_oksdg")]
+[node name="CubeActive" parent="." instance=ExtResource("1_oksdg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.636045, 2.38964, 0.43209)
+script = ExtResource("2_iy01x")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("track")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5)
+script = ExtResource("2_ndbfe")
+track = NodePath("../CubeActive")
+rate = 5.0
+basis_rate = 0.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9277, -0.0535504, -0.369467, 0.373328, 0.13307, 0.918106, 0, -0.989659, 0.143441, -4.00235, 7.47656, 0)

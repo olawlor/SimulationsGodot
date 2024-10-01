@@ -1,7 +1,7 @@
 extends Node
 
 # Kinda hacky, but reusing rocket exhaust's pool and scene
-@onready var explode_pool : Node3D = $"/root/space/exhaust_pool"
+@onready var explode_pool : Node3D = null # $"/root/space/exhaust_pool"
 @onready var explode_scene : PackedScene = preload("res:///meshes/exhaust.tscn")   # we'll fire out copies of this object
 
 
@@ -13,6 +13,8 @@ func explode(loc: Vector3, size:float=3.0, duration:float=0.8) -> void:
 	var e = explode_scene.instantiate()
 	if explode_pool != null:
 		explode_pool.add_child(e)
+	else:
+		get_tree().add_child(e)
 	e.global_position = loc
 	e.scale=Vector3.ONE * size * 0.2  #explosion starts smaller
 	
