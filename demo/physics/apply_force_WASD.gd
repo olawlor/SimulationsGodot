@@ -21,5 +21,9 @@ func _physics_process(_delta: float) -> void:
 	if (Input.is_physical_key_pressed(KEY_E)):
 		qe = -1
 	
-	var strength : float = 150.0 # newtons of force
-	constant_force = strength*Vector3(ad,ws,qe)
+	var strength : float = 1400.0 # newtons of force
+	
+	var autopilot = 0.0
+	var localforce = Vector3(ad + autopilot,ws,qe)
+	var globalforce = global_transform.basis * localforce
+	constant_force = strength*globalforce

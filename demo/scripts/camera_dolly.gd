@@ -7,13 +7,15 @@ extends Node3D
 @export var basis_rate : float = 1.0 # rate of convergence of basis
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if track == null:
 		return
 	
 	var tbasis : Basis = track.global_transform.basis
-	
-	var target : Vector3 = track.global_position + tbasis*offset
+	var where = offset # offset in global coords
+	if basis_rate>0:
+		where = tbasis*offset # offset in object coords
+	var target : Vector3 = track.global_position + where
 	global_position = lerp(global_position,target,delta*rate)
 
 	if (basis_rate>0):
