@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://xon6wlg1ehwg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wupv5"]
-size = Vector3(1000, 1, 1000)
+size = Vector3(200, 1, 200)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h1ss"]
 albedo_color = Color(0.166853, 0.166853, 0.166853, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t2ggk"]
-size = Vector3(1000, 1, 1000)
+size = Vector3(200, 1, 200)
 
 [node name="StaticBody3D" type="StaticBody3D"]
 

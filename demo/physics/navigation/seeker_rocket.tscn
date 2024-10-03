@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://g0hbi3hilrpx"]
+
+[ext_resource type="Script" path="res://physics/navigation/seeker_rocket.gd" id="1_stkcp"]
+[ext_resource type="PackedScene" uid="uid://c6kjd4t3ueg8t" path="res://rocket/scifi_rocket.tscn" id="2_6ygxl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ex7og"]
+friction = 0.11
+bounce = 0.76
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ba13t"]
+albedo_color = Color(0.820497, 0.314055, 0.234431, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kkhab"]
+radius = 1.19868
+height = 9.17552
+
+[node name="SeekerRocket" type="RigidBody3D"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, -27.3782, 2.87206, 0)
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_ex7og")
+script = ExtResource("1_stkcp")
+
+[node name="scifi_rocket" parent="." instance=ExtResource("2_6ygxl")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="scifi_rocket_panels" parent="scifi_rocket/scifi_rocket2" index="1"]
+surface_material_override/1 = SubResource("StandardMaterial3D_ba13t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0, 0, 0.3, -0.25876, -0.00455914, 0)
+shape = SubResource("CapsuleShape3D_kkhab")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[editable path="scifi_rocket"]
+[editable path="scifi_rocket/scifi_rocket2"]

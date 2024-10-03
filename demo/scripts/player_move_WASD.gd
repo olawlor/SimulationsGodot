@@ -1,16 +1,19 @@
+#  Simple WASD motion forward along +Z, and turn left and right
+#  Built in class
 extends Node3D
 
-var angle = 0
+@export var turnrate : float = 120.0 # in degrees/second
+@export var moverate : float = 5.0 # in meters/second
+@export var angle = 0 # our current orientation angle (degrees)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var turn = 0  # how much we want to turn
 	if (Input.is_physical_key_pressed(KEY_A)):
-		turn = -1
-	if (Input.is_physical_key_pressed(KEY_D)):
 		turn = +1
+	if (Input.is_physical_key_pressed(KEY_D)):
+		turn = -1
 	
-	var turnrate : float = 120.0 # in degrees/second
 	angle += turnrate * turn * delta
 	transform.basis = Basis(Vector3(0,1,0),deg_to_rad(angle))
 	
@@ -23,7 +26,6 @@ func _process(delta: float) -> void:
 	
 	# The direction we want to move is our -Z axis
 	var movedir : Vector3 = -transform.basis.z
-	var moverate : float = 5.0 # in meters/second
 	transform.origin += delta * move * moverate * movedir
 
 	# For 2D rotations, it's not too bad to do the same thing with raw trig,
