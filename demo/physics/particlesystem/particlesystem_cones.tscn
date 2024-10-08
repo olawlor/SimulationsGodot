@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2wn4jqg5426o"]
+
+[ext_resource type="Texture2D" uid="uid://boerd4pcfngah" path="res://textures/maple1_white.webp" id="1_2ehsj"]
+[ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="2_k5uo1"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="3_dnqfs"]
+[ext_resource type="Material" uid="uid://b7beg20v3bk2x" path="res://textures/circuitworld_animating.tres" id="4_qc1uk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ithpm"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_2ehsj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2b6tt"]
+material = SubResource("StandardMaterial3D_ithpm")
+size = Vector2(0.2, 0.2)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_d4mid"]
+offsets = PackedFloat32Array(0, 0.12, 0.452381, 0.724, 1)
+colors = PackedColorArray(0.164706, 0.509804, 0.25098, 0, 0.388235, 0.482353, 0.27451, 1, 1, 0.413504, 0.344848, 1, 1, 0.80417, 0.142262, 1, 0.4, 0.239216, 0.192157, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i6r7v"]
+gradient = SubResource("Gradient_d4mid")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7128"]
+angle_min = -414.8
+angle_max = 377.3
+direction = Vector3(0, 2, 0)
+spread = 180.0
+initial_velocity_min = 0.2
+initial_velocity_max = 1.0
+angular_velocity_min = -37.81
+angular_velocity_max = 32.48
+gravity = Vector3(0, -1.8, 0)
+color_ramp = SubResource("GradientTexture1D_i6r7v")
+collision_mode = 1
+collision_friction = 0.22
+collision_bounce = 0.22
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nu3wu"]
+transparency = 4
+vertex_color_use_as_albedo = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ecgrf"]
+material = SubResource("StandardMaterial3D_nu3wu")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 2
+cap_top = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_0sv7d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_veir8"]
+
+[node name="RocketPile" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.917651, 0.397388, 0, -0.397388, 0.917651, 0, 1.8, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9277, -0.0535504, -0.369467, 0.373328, 0.13307, 0.918106, 0, -0.989659, 0.143441, -4.00235, 7.47656, 0)
+shadow_enabled = true
+
+[node name="GPUParticles3D2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41404, 1.6074, -0.980052)
+amount = 40
+lifetime = 4.0
+fixed_fps = 60
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+mesh = SubResource("PlaneMesh_2b6tt")
+direction = Vector3(0, 2, 0)
+spread = 180.0
+gravity = Vector3(0, -1.8, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 1.0
+angular_velocity_min = -678.73
+angular_velocity_max = 436.18
+angle_min = -414.8
+angle_max = 377.3
+color_ramp = SubResource("Gradient_d4mid")
+
+[node name="concrete_plane" parent="." instance=ExtResource("2_k5uo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -82.0837)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.407108, -0.241943, -0.569672)
+size = Vector3(14.3448, 1.51611, 11.6253)
+
+[node name="SphereDemo" parent="." instance=ExtResource("3_dnqfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.93347, 1.72417, 0)
+
+[node name="MeshInstance3D" parent="SphereDemo" index="0"]
+visible = false
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SphereDemo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100386, -0.116771, 0)
+amount = 40
+lifetime = 4.0
+fixed_fps = 60
+interpolate = false
+collision_base_size = 0.1
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_v7128")
+draw_pass_1 = SubResource("CylinderMesh_ecgrf")
+
+[node name="CubeDemo" type="RigidBody3D" parent="."]
+transform = Transform3D(0.991002, 0.133848, 0, -0.133848, 0.991002, 0, 0, 0, 1, -2.75984, 0.5, 0)
+mass = 10.0
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CubeDemo"]
+material_override = ExtResource("4_qc1uk")
+mesh = SubResource("BoxMesh_0sv7d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeDemo"]
+shape = SubResource("BoxShape3D_veir8")
+
+[editable path="SphereDemo"]
