@@ -14,16 +14,16 @@ void fragment() {
 	vec3 C = VIEW; // points toward camera
 	//vec3 R = -L + 2.0*dot(N,L)*N; // light reflects this direction
 	vec3 H = normalize(C + L); // "halfway" vector
-	
+
 	float diffuse_light = clamp(dot(N,L),0.0,1.0);
 	float specular_light = pow(clamp(dot(H,N),0.0,1.0),20.0);
-	//if (dot(R,C)>0.99) specular_light = 1.0; // hard highlight	
-	
+	//if (dot(R,C)>0.99) specular_light = 1.0; // hard highlight
+
 	float ambient_light = 0.3; // *abs(sin(2.*TIME));
-	
+
 	ALBEDO=(diffuse_light + ambient_light) * vec3(0.5,0.2,0.5) + specular_light * vec3(0,1,1);
-	ROUGHNESS=0.0;	
-	
+	ROUGHNESS=0.0;
+
 }
 
 /*

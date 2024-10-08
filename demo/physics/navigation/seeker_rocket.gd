@@ -1,9 +1,11 @@
 extends RigidBody3D
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
-@onready var target : Node3D = $"../WASD_rocket"
+@export var target : Node3D = null
 
 func _physics_process(_delta):
+	if (target==null): 
+		return
 	nav.target_position = target.global_position 
 	var go = nav.get_next_path_position()
 	var dir = (go - global_position).normalized()

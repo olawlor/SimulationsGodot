@@ -1,16 +1,21 @@
-[gd_scene load_steps=15 format=3 uid="uid://1d3awuuo4g1o"]
+[gd_scene load_steps=20 format=3 uid="uid://1d3awuuo4g1o"]
 
 [ext_resource type="Script" path="res://scripts/camera_dolly.gd" id="1_nf740"]
 [ext_resource type="PackedScene" uid="uid://c6kjd4t3ueg8t" path="res://rocket/scifi_rocket.tscn" id="2_mkrka"]
 [ext_resource type="PackedScene" uid="uid://g0hbi3hilrpx" path="res://physics/navigation/seeker_rocket.tscn" id="3_6r4gw"]
 [ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="3_s0pri"]
 [ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="3_t8gj2"]
+[ext_resource type="Shader" path="res://physics/navigation/leaf_shader.gdshader" id="5_hcr18"]
+[ext_resource type="Texture2D" uid="uid://bqcntounji8r2" path="res://textures/maple1_transparent.webp" id="5_mfuks"]
 [ext_resource type="PackedScene" uid="uid://drq1x1lspcry" path="res://physics/rigidbody/brickwall.tscn" id="6_rsu7p"]
 [ext_resource type="Material" uid="uid://b7beg20v3bk2x" path="res://textures/circuitworld_animating.tres" id="7_q0gbj"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jaijl"]
-vertices = PackedVector3Array(-1.25, 0.897244, -11.25, -1.25, 0.897244, -12.5, -1.75, 0.897244, -99.5, -99.5, 0.897244, -99.5, -99.5, 0.897244, -11.5, -0.25, 1.14724, -12.75, -0.25, 3.89724, -2.5, 2, 3.89724, -2.5, 2, 1.14724, -12.75, -0.25, 3.64724, -5.42857, 2, 3.64724, -5.42857, 3.5, 0.897244, -99.5, 3, 0.897244, -12.5, 3, 0.897244, -10.75, 99.5, 0.897244, -10.75, 99.5, 0.897244, -99.5, -99.5, 0.897244, -3, -1.25, 0.897244, -3.25, 3, 0.897244, -3.75, 99.5, 0.897244, -3.75, 0, 0.897244, -8.25, 0, 0.897244, -5.75, 1.75, 0.897244, -5.75, 1.75, 0.897244, -8.25, 2.75, 0.897244, -1.5, 0.75, 0.897244, 99.5, 99.5, 0.897244, 99.5, 0.75, 0.897244, -1.5, 0, 0.897244, -3.5, 0, 0.897244, -2.75, 1.75, 0.897244, -2.75, 1.75, 0.897244, -3.5, -1, 0.897244, -1.5, -99.5, 0.897244, 99.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(6, 9, 7), PackedInt32Array(7, 9, 10), PackedInt32Array(10, 9, 5), PackedInt32Array(10, 5, 8), PackedInt32Array(5, 2, 8), PackedInt32Array(8, 2, 11), PackedInt32Array(11, 12, 8), PackedInt32Array(5, 1, 2), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 15), PackedInt32Array(13, 15, 14), PackedInt32Array(17, 16, 0), PackedInt32Array(0, 16, 4), PackedInt32Array(13, 14, 18), PackedInt32Array(18, 14, 19), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(18, 19, 24), PackedInt32Array(24, 19, 26), PackedInt32Array(24, 26, 25), PackedInt32Array(25, 27, 24), PackedInt32Array(31, 30, 28), PackedInt32Array(28, 30, 29), PackedInt32Array(17, 32, 16), PackedInt32Array(16, 32, 33), PackedInt32Array(33, 32, 25), PackedInt32Array(32, 27, 25)]
+vertices = PackedVector3Array(0.980003, 0.897243, 17.4463, 0.980003, 0.897243, -1.45374, -1.17999, 0.897243, -1.72374, -99.46, 0.897243, 17.4463, -1.17999, 0.897243, -13.0637, -1.71999, 0.897243, -181.544, -99.46, 0.897243, -181.544, -0.0999985, 1.14724, -13.3337, -0.0999985, 1.89724, -11.1737, 2.06001, 1.89724, -11.1737, 2.06001, 1.14724, -13.3337, 3.68001, 0.897243, -181.544, 3.14001, 0.897243, -13.0637, 3.14001, 0.897243, -1.72374, 99.53, 0.897243, 17.4463, 99.53, 0.897243, -181.544, 0.980003, 2.64724, -8.47374, 2.06001, 2.64724, -8.74373, 10.16, 3.89724, -7.66373, 2.06001, 3.89724, -7.66373, 2.06001, 3.89724, -5.77373, 0.980003, 3.64724, -5.77373, -0.0999985, 3.89724, -2.53374, -0.0999985, 3.89724, -5.41374, 2.06001, 3.89724, -2.26373, 10.16, 3.89724, 0.16626, 2.06001, 3.89724, 0.16626, 0.170006, 0.897243, -7.93373, 0.170006, 0.897243, -5.77373, 1.79, 0.897243, -5.77373, 1.79, 0.897243, -7.93373, 0.170006, 0.897243, -3.34373, 0.170006, 0.897243, -2.80373, 1.79, 0.897243, -2.80373, 1.79, 0.897243, -3.34373)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(2, 3, 4), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(10, 9, 7), PackedInt32Array(7, 9, 8), PackedInt32Array(7, 5, 10), PackedInt32Array(10, 5, 11), PackedInt32Array(11, 12, 10), PackedInt32Array(5, 7, 4), PackedInt32Array(1, 13, 0), PackedInt32Array(0, 13, 14), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 11), PackedInt32Array(14, 11, 15), PackedInt32Array(17, 16, 9), PackedInt32Array(9, 16, 8), PackedInt32Array(20, 19, 18), PackedInt32Array(22, 23, 21), PackedInt32Array(21, 23, 16), PackedInt32Array(16, 23, 8), PackedInt32Array(20, 18, 24), PackedInt32Array(24, 18, 25), PackedInt32Array(20, 24, 21), PackedInt32Array(21, 24, 22), PackedInt32Array(25, 26, 24), PackedInt32Array(30, 29, 27), PackedInt32Array(27, 29, 28), PackedInt32Array(34, 33, 31), PackedInt32Array(31, 33, 32)]
+geometry_parsed_geometry_type = 2
+cell_size = 0.27
+agent_max_slope = 80.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_0sv7d"]
 
@@ -22,11 +27,36 @@ size = Vector3(3, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_04omr"]
 size = Vector3(3, 1, 1)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_mgl5b"]
+size = Vector2(5, 5)
+subdivide_width = 8
+subdivide_depth = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61w7b"]
+render_priority = 0
+shader = ExtResource("5_hcr18")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("5_mfuks")
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rktmo"]
 points = PackedVector3Array(3.50513, -0.0825488, 0.261457, -2.03926, -0.705334, -0.97633, -1.76096, -0.763961, -0.683195, -2.05717, 0.861661, 0.761512, 2.19529, 0.701989, -0.959594, -2.03968, -0.705438, 0.975808, 2.20555, -0.698292, -0.966647, 2.19529, 0.701989, 0.958928, -2.01157, 0.707238, -0.966812, 2.20555, -0.698292, 0.96598, 1.65372, -0.849439, 0.255805, 1.56053, 0.849813, -0.253937, 3.59311, 0.00441265, -0.270637, -2.05717, 0.861661, -0.762179, -2.01199, 0.707342, 0.966289, -1.41955, -0.849313, -0.256434, 3.09382, 0.0925035, 0.793676, 3.1018, -0.0838114, -0.797105, 3.59241, 0.0915388, 0.0868612, 1.56064, 0.849938, 0.253308, 1.65359, -0.849313, -0.256434, -1.41988, -0.849439, 0.255805, 3.61161, -0.0831405, -0.0881272, 2.3783, 0.530422, -0.964936, 2.37913, 0.530696, 0.964771, 2.81794, -0.258755, 0.877, 3.09343, 0.0924888, -0.79421, 3.32322, 0.00441265, 0.630436, 2.3783, -0.521597, -0.964936, 3.59241, 0.0915388, -0.0875278, 3.59358, 0.00441265, 0.270016, 1.91002, -0.764074, 0.682629)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yf38q"]
 points = PackedVector3Array(-0.941136, 0.667811, 0.121351, 0.979011, 0.979011, 0.183421, 0.978981, 0.978981, -0.183415, 0.15006, -0.960534, 0.0898855, -0.183089, 0.977238, -0.977238, -0.183081, 0.977199, 0.977199, -0.090076, -0.420104, -0.630344, -0.56531, -0.446356, 0.267739, 0.330729, 0, 0.751486, 0.652756, -0.0295609, -0.474833, -0.912517, 0.973504, -0.395462, 0.78158, -0.0600781, 0.150289, -0.506617, -0.41717, -0.387479, 0.394882, 0.972077, -0.911179, -0.389901, 0, 0.719861, 0.670431, 0.975381, 0.731536, -0.758209, 0.970659, 0.636971, -0.474718, -0.0295653, -0.652854, -0.0900732, -0.96053, -0.150059, -0.0598497, -0.479173, 0.598873, 0.444471, -0.444471, -0.444471, -0.782454, 0, -0.24077, 0.0302437, 0, -0.819623, 0.652758, -0.0295609, 0.474834, -0.751568, 0, 0.330577, -0.670446, 0.975402, -0.731552, 0.758178, 0.97062, -0.636946, 0.389901, 0, -0.719861, -0.150072, -0.96061, 0.0898926, 0.452514, -0.482757, 0.392217, 0.598873, -0.479173, -0.0598498, 0.183089, 0.977237, 0.977237)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_84pxq"]
+vertices = PackedVector3Array(-99.5, 1, 17.3716, -99.5, 1, 216.372, 99.5, 1, 216.372, 99.5, 1, 17.3716)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [node name="RocketPile" type="Node3D"]
 
@@ -46,6 +76,7 @@ shadow_enabled = true
 navigation_mesh = SubResource("NavigationMesh_jaijl")
 
 [node name="concrete_plane" parent="NavigationRegion3D" instance=ExtResource("3_s0pri")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -82.0837)
 
 [node name="CubeDemo" type="StaticBody3D" parent="NavigationRegion3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.947977, 1.99184, -3.72722)
@@ -71,14 +102,25 @@ mesh = SubResource("BoxMesh_716jf")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_04omr")
 
-[node name="SeekerRocket" parent="." instance=ExtResource("3_6r4gw")]
+[node name="LeafLevel3D" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.07679, 3.43385, -3.69565)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/LeafLevel3D"]
+transform = Transform3D(1.74547, 0, 0, 0, 1.74547, 0, 0, 0, 1.74547, 0, 0, 0)
+mesh = SubResource("PlaneMesh_mgl5b")
+surface_material_override/0 = SubResource("ShaderMaterial_61w7b")
+
+[node name="SeekerRocket" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_6r4gw")]
 transform = Transform3D(-4.37113e-08, 0, -1, 0, 0.999999, 0, 0.999999, 0, -4.37114e-08, 3.49393, 2.87206, -29.4668)
+target = NodePath("../WASD_rocket")
 
-[node name="SeekerRocket2" parent="." instance=ExtResource("3_6r4gw")]
+[node name="SeekerRocket2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_6r4gw")]
 transform = Transform3D(-4.37113e-08, 0, -1, 0, 0.999998, 0, 0.999998, 0, -4.37114e-08, 0.325855, 1.55887, -26.5719)
+target = NodePath("../WASD_rocket")
 
-[node name="SeekerRocket3" parent="." instance=ExtResource("3_6r4gw")]
+[node name="SeekerRocket3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_6r4gw")]
 transform = Transform3D(-4.37113e-08, 0, -1, 0, 0.999999, 0, 0.999999, 0, -4.37114e-08, 6.81595, 1.51764, -29.4668)
+target = NodePath("../WASD_rocket")
 
 [node name="Brickwall" parent="." instance=ExtResource("6_rsu7p")]
 transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 5.78736, 0.669944, -15.0559)
@@ -99,6 +141,13 @@ shape = SubResource("ConvexPolygonShape3D_rktmo")
 [node name="CollisionShape3DNozzle" type="CollisionShape3D" parent="WASD_rocket/RigidBodyRocket"]
 transform = Transform3D(6.0536e-08, -1, 0, 1, 6.0536e-08, 0, 0, 0, 1, -4.00283, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_yf38q")
+
+[node name="NavigationRegion3D2" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.249912)
+navigation_mesh = SubResource("NavigationMesh_84pxq")
+
+[node name="StaticBody3D" parent="NavigationRegion3D2" instance=ExtResource("3_s0pri")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 116.872)
 
 [editable path="WASD_rocket/RigidBodyRocket/scifi_rocket"]
 [editable path="WASD_rocket/RigidBodyRocket/scifi_rocket/scifi_rocket2"]

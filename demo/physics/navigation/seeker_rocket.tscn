@@ -31,6 +31,7 @@ transform = Transform3D(-1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0, 0, 0.3, 
 shape = SubResource("CapsuleShape3D_kkhab")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
 
 [editable path="scifi_rocket"]
 [editable path="scifi_rocket/scifi_rocket2"]

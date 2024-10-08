@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cay3doosd464l"]
+
+[ext_resource type="Texture2D" uid="uid://boerd4pcfngah" path="res://textures/maple1_white.webp" id="1_ugagv"]
+
+[sub_resource type="Curve" id="Curve_2v4n6"]
+_data = [Vector2(0.817241, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_00gcm"]
+curve = SubResource("Curve_2v4n6")
+
+[sub_resource type="Gradient" id="Gradient_d4mid"]
+offsets = PackedFloat32Array(0, 0.452381, 0.724, 1)
+colors = PackedColorArray(0.16323, 0.508398, 0.250296, 1, 1, 0.413504, 0.344848, 1, 1, 0.80417, 0.142262, 1, 0.398487, 0.24111, 0.192652, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i6r7v"]
+gradient = SubResource("Gradient_d4mid")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xeq36"]
+angle_min = -414.8
+angle_max = 377.3
+direction = Vector3(-1, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = -678.73
+angular_velocity_max = 436.18
+color_ramp = SubResource("GradientTexture1D_i6r7v")
+alpha_curve = SubResource("CurveTexture_00gcm")
+collision_mode = 1
+collision_friction = 0.11
+collision_bounce = 0.73
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc2gd"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_ugagv")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7ulh6"]
+material = SubResource("StandardMaterial3D_bc2gd")
+size = Vector2(0.2, 0.2)
+orientation = 2
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09512, 2.4143, 0)
+amount = 40
+lifetime = 4.0
+speed_scale = 0.1
+fixed_fps = 60
+interpolate = false
+collision_base_size = 0.1
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+draw_order = 3
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_xeq36")
+draw_pass_1 = SubResource("PlaneMesh_7ulh6")
