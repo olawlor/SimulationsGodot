@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://tbc2pdppktsc"]
+
+[ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="1_hg0y2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5gnx3"]
+radius = 0.6
+height = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_5sb08"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" parent="." instance=ExtResource("1_hg0y2")]
+
+[node name="LODdemo" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14982, 0)
+
+[node name="NearSphere" type="MeshInstance3D" parent="LODdemo"]
+visibility_range_end = 5.0
+mesh = SubResource("SphereMesh_5gnx3")
+skeleton = NodePath("../..")
+
+[node name="FarCube" type="MeshInstance3D" parent="LODdemo"]
+visibility_range_begin = 5.0
+mesh = SubResource("BoxMesh_5sb08")
+skeleton = NodePath("../..")
+
+[node name="LODdemo_parent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49637, 1.14982, 0)
+
+[node name="FarCube" type="MeshInstance3D" parent="LODdemo_parent"]
+visibility_range_begin = 5.0
+mesh = SubResource("BoxMesh_5sb08")
+skeleton = NodePath("../..")
+
+[node name="NearSphere" type="MeshInstance3D" parent="LODdemo_parent/FarCube"]
+visibility_parent = NodePath("..")
+mesh = SubResource("SphereMesh_5gnx3")
+skeleton = NodePath("../../..")
