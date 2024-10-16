@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://btlcqxy6dfmv1"]
+
+[ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_frgfo"]
+[ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="2_85xbq"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="3_2x2cw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2115k"]
+friction = 0.55
+bounce = 0.8
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bfp46"]
+orientation = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pi58f"]
+viewport_path = NodePath("CCTV_Pole/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15wgh"]
+resource_local_to_scene = true
+cull_mode = 2
+albedo_color = Color(0.00351917, 0.00351917, 0.00351917, 1)
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_pi58f")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6q0rt"]
+size = Vector3(0.2, 0.2, 0.4)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cnqga"]
+radius = 0.1
+height = 4.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41281, 2.13025, 9.1105)
+script = ExtResource("1_frgfo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.79279, -0.0218668, -0.609102, 0.590476, 0.275257, 0.758665, 0.15107, -0.961122, 0.231133, -2.85245, 7.4512, 1.0824)
+shadow_enabled = true
+
+[node name="GroundPlane" parent="." instance=ExtResource("2_85xbq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="SphereDemo" parent="." instance=ExtResource("3_2x2cw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.93086, 4.10076, 0)
+physics_material_override = SubResource("PhysicsMaterial_2115k")
+
+[node name="CCTV_Display" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.898472, 0, -0.43903, 0, 1, 0, 0.43903, 0, 0.898472, -0.0108984, 2.08782, 0.423349)
+mesh = SubResource("PlaneMesh_bfp46")
+surface_material_override/0 = SubResource("StandardMaterial3D_15wgh")
+
+[node name="CCTV_Pole" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.559, 0, 3.91206)
+
+[node name="SubViewport" type="SubViewport" parent="CCTV_Pole"]
+
+[node name="Camera3D" type="Camera3D" parent="CCTV_Pole/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.997131, 0.0756923, 0, -0.0756923, 0.997131, 3.559, 3.5437, 3.67364)
+
+[node name="CameraBoxMesh" type="MeshInstance3D" parent="CCTV_Pole/SubViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0540245)
+mesh = SubResource("BoxMesh_6q0rt")
+
+[node name="PoleMesh" type="MeshInstance3D" parent="CCTV_Pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87782, 0)
+mesh = SubResource("CapsuleMesh_cnqga")
