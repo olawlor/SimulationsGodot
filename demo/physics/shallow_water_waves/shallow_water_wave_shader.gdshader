@@ -25,7 +25,7 @@ void fragment() {
 	// Compute our new color, based on our neighbors
 	float H = 1.0; // mean height (meters)
 	float g = 1.0; // gravity accleration (m/s^2)
-	float k = 0.01; // viscous drag (fraction)
+	float k = 0.0; // viscous drag (fraction)
 	float gridsize = 1.0; // spatial distance for 2 grid cells (meters)
 
 	// Shallow-water wave equations!
@@ -37,6 +37,7 @@ void fragment() {
 	float dv_dt = -g*d_dy.z - k*C.y;
 	vec4 d_dt = vec4(du_dt,dv_dt,dh_dt,0.0); // how we change with time
 
+	// Time integration, and stability
 	float dt = 0.25; // timestep (seconds)
 	float stabilize = 0.28; // stabilize via weak neighbor averaging
 	float grayify = 0.001; // very slight draw toward grayscale (avoid saturation)
@@ -50,15 +51,17 @@ void fragment() {
 	vec4 rando = texture(rando_texture,UV + fract(vec2(TIME*2.34,TIME*5.67)));
 	COLOR += roundoff * (rando-0.5);
 
-	//COLOR = vec4(vec3(0.5),1.0); // reinitialize to solid gray
+	// Boundary conditions
+	if (TIME<1.0)
+		COLOR = vec4(vec3(0.5),1.0); // reinitialize to solid gray
 
 	// Add a bottom 'wave generator'
 	if (UV.y>0.98) {
 		float t = 8.0*TIME; // main wave cycle
-		COLOR = 0.5+vec4(0.2*cos(2.0*TIME),0.5*sin(t),0.5*sin(t),1.0);
+		COLOR = 0.5+vec4(0.2*cos(2.0*TIME),0.4*sin(t),0.4*sin(t),1.0);
 	}
 
 	// Add a solid color ball in the middle
 	if (length(UV-vec2(0.5,0.5))<0.1*abs(sin(TIME)))
-		COLOR = vec4(2.0*UV.x,1.8*UV.y,1,1);
+		COLOR = vec4(0.7,0.7,0.7,1);
 }
