@@ -37,8 +37,8 @@ void fragment() {
 	float dv_dt = -g*d_dy.z - k*C.y;
 	vec4 d_dt = vec4(du_dt,dv_dt,dh_dt,0.0); // how we change with time
 
-	float dt = 0.2; // timestep (seconds)
-	float stabilize = 0.2; // stabilize via weak neighbor averaging
+	float dt = 0.25; // timestep (seconds)
+	float stabilize = 0.28; // stabilize via weak neighbor averaging
 	float grayify = 0.001; // very slight draw toward grayscale (avoid saturation)
 
 	vec4 new_C = C + d_dt*dt; // take the timestep
