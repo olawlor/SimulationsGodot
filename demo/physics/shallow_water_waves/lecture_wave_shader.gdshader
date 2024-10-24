@@ -53,11 +53,11 @@ void fragment() {
 	vec4 target_gray = vec4(0.5);
 	vec4 gray_C = mix(stable_C, target_gray, grayscale);
 
-	// Stochasic resonance to avoid quantization error
+	// Add "stochasic resonance" noise, to work around quantization error
 	float add_noise = 1.0/255.0;
 	vec4 noise = texture(rando_texture,UV + fract(vec2(TIME,5.345*TIME)));
-	vec4 noisy_C = mix(gray_C,noise,add_noise);
-
+	vec4 noisy_C = gray_C + add_noise*(noise-0.5);
+	
 	COLOR = noisy_C;
 
 
