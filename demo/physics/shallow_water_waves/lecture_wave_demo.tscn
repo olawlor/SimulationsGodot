@@ -1,0 +1,153 @@
+[gd_scene load_steps=16 format=3 uid="uid://cp1v553vg3c48"]
+
+[ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_3k5xg"]
+[ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="2_0iei4"]
+[ext_resource type="Shader" path="res://physics/shallow_water_waves/lecture_wave_shader.gdshader" id="3_jth28"]
+[ext_resource type="Texture2D" uid="uid://dvci7of3j55xl" path="res://physics/shallow_water_waves/rando_texture.png" id="4_7wjtw"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0or54"]
+viewport_path = NodePath("Shader Buffer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_146cl"]
+resource_local_to_scene = true
+shader = ExtResource("3_jth28")
+shader_parameter/last_frame = SubResource("ViewportTexture_0or54")
+shader_parameter/rando_texture = ExtResource("4_7wjtw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bfp46"]
+size = Vector2(4, 4)
+orientation = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pi58f"]
+viewport_path = NodePath("Shader Buffer/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15wgh"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_pi58f")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_usg1x"]
+size = Vector2(20, 20)
+subdivide_width = 256
+subdivide_depth = 256
+
+[sub_resource type="Shader" id="Shader_idqp6"]
+code = "/*
+ Water ripple shader: draws the wave simulation as a metallic normal map.
+*/
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform sampler2D wave_sim;
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+void vertex() {
+	// Adjust the vertical height of each vertex
+	vec4 sim = texture(wave_sim,UV);
+	VERTEX.y += 0.3*sim.z;
+}
+
+void fragment() {
+	ALBEDO = vec3(1.0);
+
+	METALLIC = metallic;
+	SPECULAR = specular;
+	ROUGHNESS = roughness;
+
+	// Load our neighboring pixels
+	vec2 uvPixel = 1.0 / vec2(textureSize(wave_sim,0));
+	//vec4 sim = texture(wave_sim,UV);
+	vec4  T  = texture(wave_sim,UV + vec2(0,-uvPixel.y));
+	vec4 L   = texture(wave_sim,UV + vec2(-uvPixel.x,0));
+	vec4   R = texture(wave_sim,UV + vec2(+uvPixel.x,0));
+	vec4  B  = texture(wave_sim,UV + vec2(0,+uvPixel.y));
+
+	// Compute spatial derivatives
+	vec4 d_dx = (R-L);
+	vec4 d_dy = (T-B);
+
+	// Normal = (-dh / dx, -dh / dy, dh/dz)
+	vec3 normal = vec3(-d_dx.z,-d_dy.z,1.0); // normal vector
+	// Write to the normal map, which uses a reasonable coordinate system
+	//  (tangent space, which is lined up with world XYZ)
+	NORMAL_MAP = 0.5+0.5*normalize(normal);
+}
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kwda0"]
+viewport_path = NodePath("Shader Buffer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs7a7"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_idqp6")
+shader_parameter/roughness = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/wave_sim = SubResource("ViewportTexture_kwda0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_yiwf6"]
+size = Vector3(1, 9, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22gyx"]
+albedo_color = Color(0.913716, 0.0799681, 0.253075, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+cull_mask = 1023
+script = ExtResource("1_3k5xg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0131882, 0.997893, -0.0635294, 0.999677, 0.0145395, 0.0208529, 0.021732, -0.0632338, -0.997762, -2.85245, 7.4512, 1.0824)
+layers = 1048575
+shadow_enabled = true
+
+[node name="GroundPlane" parent="." instance=ExtResource("2_0iei4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Shader Buffer" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="Shader Buffer"]
+disable_3d = true
+transparent_bg = true
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="Shader Buffer/SubViewport"]
+material = SubResource("ShaderMaterial_146cl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shader Display" type="MeshInstance3D" parent="Shader Buffer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+layers = 1023
+mesh = SubResource("PlaneMesh_bfp46")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_15wgh")
+
+[node name="Water Ripple Display" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1998, 0.720058, -1.61427)
+mesh = SubResource("PlaneMesh_usg1x")
+surface_material_override/0 = SubResource("ShaderMaterial_rs7a7")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Water Ripple Display"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.98738, 0.493268, 6.37249)
+update_mode = 1
+size = Vector3(40, 40, 40)
+
+[node name="RedMonolith" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6237, 4.50171, -0.313702)
+mesh = SubResource("BoxMesh_yiwf6")
+surface_material_override/0 = SubResource("StandardMaterial3D_22gyx")
