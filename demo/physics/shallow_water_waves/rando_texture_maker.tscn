@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yg2mt58x6yvd"]
+
+[ext_resource type="Script" path="res://physics/shallow_water_waves/rando_texture_maker.gd" id="1_wohqw"]
+
+[node name="rando_texture" type="Node3D"]
+script = ExtResource("1_wohqw")
