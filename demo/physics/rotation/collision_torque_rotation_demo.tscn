@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcwkhhxq3wi25"]
+
+[ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_ekkdd"]
+[ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="2_2ext0"]
+[ext_resource type="Script" path="res://physics/rotation/print_rotation.gd" id="3_mrk85"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="3_nsk4q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yiwf6"]
+size = Vector3(1, 9, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22gyx"]
+albedo_color = Color(0.250543, 0.00368408, 0.040753, 1)
+roughness = 0.83
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xd6b"]
+size = Vector3(1, 9, 4)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 18.3079)
+cull_mask = 1023
+script = ExtResource("1_ekkdd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0636909, 0.997893, -0.0123857, -0.0334649, 0.0145395, 0.999334, 0.997409, -0.0632338, 0.034321, -2.85245, 7.4512, 1.0824)
+layers = 1048575
+shadow_enabled = true
+
+[node name="GroundPlane" parent="." instance=ExtResource("2_2ext0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.73705, 0)
+mass = 100.0
+gravity_scale = 0.0
+angular_damp_mode = 1
+script = ExtResource("3_mrk85")
+
+[node name="Monolith" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_yiwf6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_22gyx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_0xd6b")
+
+[node name="SphereDemo" parent="." instance=ExtResource("3_nsk4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.88077, 0)
+gravity_scale = 0.0
+linear_velocity = Vector3(10, 0, 0)
