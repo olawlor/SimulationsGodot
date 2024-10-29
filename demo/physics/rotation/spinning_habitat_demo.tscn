@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmcdbjpyehkgo"]
+[gd_scene load_steps=14 format=3 uid="uid://cmcdbjpyehkgo"]
 
 [ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_hjeu3"]
 [ext_resource type="Script" path="res://physics/rotation/rotating_uniform.gd" id="2_10jo0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://3qd133uipwmi" path="res://textures/circuit_board.png" id="5_ujj5u"]
 [ext_resource type="PackedScene" uid="uid://bwi436wllrmlx" path="res://physics/rigidbody/rigidbody_cube_demo.tscn" id="6_5tq32"]
 [ext_resource type="Script" path="res://physics/rotation/rotating_physics_uniform.gd" id="6_sh68t"]
+[ext_resource type="PackedScene" uid="uid://dm3lcmehstl0i" path="res://meshes/scifi_dome.tscn" id="7_qqpiu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_yiwf6"]
 size = Vector3(1, 4, 4)
@@ -29,11 +30,13 @@ cap_bottom = false
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5u3vo"]
 cull_mode = 2
 albedo_texture = ExtResource("5_ujj5u")
+uv1_scale = Vector3(16, 16, 16)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.00676259, 0.997893, -0.0645304, 0.992568, 0.0145393, 0.120816, 0.1215, -0.0632338, -0.990575, -2.85245, 7.4512, 1.0824)
+visible = false
 layers = 1048575
 shadow_enabled = true
 
@@ -93,6 +96,11 @@ constant_angular_velocity = Vector3(0, 0, 0.523599)
 [node name="GraphicSpinner" type="Node3D" parent="BarrelBody"]
 script = ExtResource("2_10jo0")
 
+[node name="Camera3D" type="Camera3D" parent="BarrelBody/GraphicSpinner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5707, 17.1195)
+cull_mask = 1023
+script = ExtResource("1_hjeu3")
+
 [node name="BarrelMesh" type="MeshInstance3D" parent="BarrelBody/GraphicSpinner"]
 physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -100,16 +108,18 @@ mesh = SubResource("CylinderMesh_xtqop")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_5u3vo")
 
+[node name="scifi_dome_Zm" parent="BarrelBody/GraphicSpinner" instance=ExtResource("7_qqpiu")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -10)
+
+[node name="scifi_dome_Zp" parent="BarrelBody/GraphicSpinner" instance=ExtResource("7_qqpiu")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 10)
+
 [node name="SpotLight3D" type="SpotLight3D" parent="BarrelBody/GraphicSpinner"]
 transform = Transform3D(1, 0, 0, 0, 0.0992676, 0.995061, 0, -0.995061, 0.0992676, 0, 11.004, 1.09776)
-light_energy = 4.0
+light_energy = 8.0
+light_indirect_energy = 2.625
 shadow_enabled = true
 spot_range = 50.0
-
-[node name="Camera3D" type="Camera3D" parent="BarrelBody/GraphicSpinner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5707, 19.3952)
-cull_mask = 1023
-script = ExtResource("1_hjeu3")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="BarrelBody"]
 depth = 20.0

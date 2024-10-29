@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm3lcmehstl0i"]
+
+[ext_resource type="PackedScene" uid="uid://dvoyf6lw4u3ve" path="res://meshes/scifi_dome.glb" id="1_v24mp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bst0"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.717647, 0.717647, 0.717647, 0.141176)
+metallic = 0.1
+metallic_specular = 0.85
+roughness = 0.0
+clearcoat_roughness = 0.0
+
+[node name="scifi_dome" instance=ExtResource("1_v24mp")]
+
+[node name="scifi_dome_glass" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4bst0")
