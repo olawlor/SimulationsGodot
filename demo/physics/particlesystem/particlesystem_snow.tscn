@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://cwhx1njejcwby"]
+
+[ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="1_c6raw"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="2_8ytgq"]
+
+[sub_resource type="Curve" id="Curve_spj61"]
+_data = [Vector2(0.224026, 0.0120001), 0.0, 0.0, 0, 0, Vector2(0.724026, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vk78g"]
+curve = SubResource("Curve_spj61")
+
+[sub_resource type="Curve" id="Curve_3tlps"]
+_data = [Vector2(0.258621, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_5njm2"]
+curve = SubResource("Curve_3tlps")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w8wo1"]
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(10, 0, 10)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -179.0
+angle_max = 141.5
+direction = Vector3(0, 1, 0)
+spread = 25.998
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+angular_velocity_min = -112.37
+angular_velocity_max = 129.02
+velocity_limit_curve = SubResource("CurveTexture_5njm2")
+scale_min = 0.1
+scale_max = 0.2
+turbulence_noise_scale = 5.08
+turbulence_influence_min = 0.03
+turbulence_influence_max = 0.04
+turbulence_influence_over_life = SubResource("CurveTexture_vk78g")
+collision_mode = 1
+collision_friction = 0.64
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itovv"]
+cull_mode = 2
+subsurf_scatter_strength = 0.9
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kd3f0"]
+material = SubResource("StandardMaterial3D_itovv")
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[sub_resource type="Environment" id="Environment_1pwje"]
+background_mode = 1
+ambient_light_energy = 0.0
+
+[node name="RocketPile" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.917651, 0.397388, 0, -0.397388, 0.917651, 0, 1.8, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9277, -0.0535504, -0.369467, 0.373328, 0.13307, 0.918106, 0, -0.989659, 0.143441, -4.00235, 7.47656, 0)
+light_energy = 0.1
+
+[node name="concrete_plane" parent="." instance=ExtResource("1_c6raw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -82.0837)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.10394, 0)
+amount = 50000
+lifetime = 10.0
+preprocess = 1.95
+randomness = 0.96
+fixed_fps = 60
+interpolate = false
+visibility_aabb = AABB(-100, -1000, -100, 1000, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_w8wo1")
+draw_pass_1 = SubResource("PlaneMesh_kd3f0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1pwje")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0552464, 0.998473, 0, -0.998473, 0.0552464, 0, 4.41916, 0)
+light_color = Color(0.883375, 0.607454, 0.537931, 1)
+light_energy = 15.073
+spot_range = 9.199
+spot_angle = 28.04
+
+[node name="SphereDemo" parent="." instance=ExtResource("2_8ytgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27219, 0)
+
+[node name="MeshInstance3D" parent="SphereDemo" index="0"]
+visible = false
+
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="SphereDemo"]
+radius = 0.5
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="SphereDemo"]
+visible = false
+strength = 200.0
+radius = 0.5
+
+[editable path="SphereDemo"]
