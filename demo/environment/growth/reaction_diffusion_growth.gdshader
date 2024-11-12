@@ -26,7 +26,7 @@ void fragment() {
 	/*
 	 Turk-Turing Reaction Diffusion Equations
 	*/
-	float Rs = 0.20; // reaction rate
+	float Rs = 0.20; // discrete reaction rate (sets scale)
 	float beta = UV.y; // vary the decay rate
 
 	// Compute the reaction rates
