@@ -69,7 +69,7 @@ void fragment() {
 	// Wave generator
 	if (UV.x<0.05) {
 		float waverate = 8.0*TIME;
-		COLOR = 0.5 + vec4(0.4*sin(waverate),0.0,0.4*sin(waverate),1.0);
+		COLOR = 0.5 + 4.0*vec4(0.4*sin(waverate),0.0,0.4*sin(waverate),1.0);
 	}
 
 	COLOR.a = 1.0; // opaque pixels

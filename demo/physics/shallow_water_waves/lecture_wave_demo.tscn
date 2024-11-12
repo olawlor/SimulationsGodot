@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xon6wlg1ehwg" path="res://physics/rigidbody/concrete_plane.tscn" id="2_0iei4"]
 [ext_resource type="Shader" path="res://physics/shallow_water_waves/lecture_wave_shader.gdshader" id="3_jth28"]
 [ext_resource type="Texture2D" uid="uid://dvci7of3j55xl" path="res://physics/shallow_water_waves/rando_texture.png" id="4_7wjtw"]
+[ext_resource type="Shader" path="res://physics/shallow_water_waves/lecture_wave_display.gdshader" id="5_2v8ce"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0or54"]
 viewport_path = NodePath("Shader Buffer/SubViewport")
@@ -35,59 +36,13 @@ size = Vector2(20, 20)
 subdivide_width = 256
 subdivide_depth = 256
 
-[sub_resource type="Shader" id="Shader_idqp6"]
-code = "/*
- Water ripple shader: draws the wave simulation as a metallic normal map.
-*/
-shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
-
-uniform sampler2D wave_sim;
-
-uniform float roughness : hint_range(0.0, 1.0);
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-
-void vertex() {
-	// Adjust the vertical height of each vertex
-	vec4 sim = texture(wave_sim,UV);
-	VERTEX.y += 0.3*sim.z;
-}
-
-void fragment() {
-	ALBEDO = vec3(1.0);
-
-	METALLIC = metallic;
-	SPECULAR = specular;
-	ROUGHNESS = roughness;
-
-	// Load our neighboring pixels
-	vec2 uvPixel = 1.0 / vec2(textureSize(wave_sim,0));
-	//vec4 sim = texture(wave_sim,UV);
-	vec4  T  = texture(wave_sim,UV + vec2(0,-uvPixel.y));
-	vec4 L   = texture(wave_sim,UV + vec2(-uvPixel.x,0));
-	vec4   R = texture(wave_sim,UV + vec2(+uvPixel.x,0));
-	vec4  B  = texture(wave_sim,UV + vec2(0,+uvPixel.y));
-
-	// Compute spatial derivatives
-	vec4 d_dx = (R-L);
-	vec4 d_dy = (T-B);
-
-	// Normal = (-dh / dx, -dh / dy, dh/dz)
-	vec3 normal = vec3(-d_dx.z,-d_dy.z,1.0); // normal vector
-	// Write to the normal map, which uses a reasonable coordinate system
-	//  (tangent space, which is lined up with world XYZ)
-	NORMAL_MAP = 0.5+0.5*normalize(normal);
-}
-"
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_kwda0"]
 viewport_path = NodePath("Shader Buffer/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rs7a7"]
 resource_local_to_scene = true
 render_priority = 0
-shader = SubResource("Shader_idqp6")
+shader = ExtResource("5_2v8ce")
 shader_parameter/roughness = 0.0
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 1.0

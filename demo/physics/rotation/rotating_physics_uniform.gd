@@ -5,4 +5,4 @@ extends Node3D
 
 # Called every physics frame.
 func _physics_process(delta: float) -> void:
-	rotation.z += delta*deg_to_rad(rate)
+	global_rotation.z += delta*deg_to_rad(rate)
