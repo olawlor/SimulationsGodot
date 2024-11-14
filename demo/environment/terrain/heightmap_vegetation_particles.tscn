@@ -1,0 +1,144 @@
+[gd_scene load_steps=15 format=3 uid="uid://dosb4opqpa0d5"]
+
+[ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_k43x5"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="2_qdqey"]
+[ext_resource type="Shader" path="res://environment/terrain/heightmap_shader_simple.gdshader" id="3_o6mhm"]
+[ext_resource type="Texture2D" uid="uid://cved8u2y1s6ss" path="res://environment/terrain/heightmap_denali_dem.jpg" id="4_dywpb"]
+[ext_resource type="Script" path="res://environment/terrain/heightmap_collision_3d.gd" id="5_8lco4"]
+[ext_resource type="Shader" path="res://environment/terrain/heightmap_vegetation_particleshader_spawn.gdshader" id="6_ghti7"]
+[ext_resource type="Texture2D" uid="uid://cbrv0g0joyi7s" path="res://environment/terrain/heightmap_denali_color.jpg" id="7_5tg8v"]
+[ext_resource type="Texture2D" uid="uid://bqcntounji8r2" path="res://textures/maple1_transparent.webp" id="7_w37f3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m2ssc"]
+size = Vector2(160, 160)
+subdivide_width = 254
+subdivide_depth = 254
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpn1d"]
+render_priority = 0
+shader = ExtResource("3_o6mhm")
+shader_parameter/height_range = 3.0
+shader_parameter/pixel_size = 3.0
+shader_parameter/heightmap = ExtResource("4_dywpb")
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_2yc2n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6ayr"]
+shader = ExtResource("6_ghti7")
+shader_parameter/height_range = 3.0
+shader_parameter/height_span = 160.0
+shader_parameter/direction = Vector3(1, 0, 0)
+shader_parameter/spread = 45.0
+shader_parameter/flatness = 0.0
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/initial_linear_velocity_min = 0.0
+shader_parameter/initial_linear_velocity_max = 0.0
+shader_parameter/directional_velocity_min = 1.0
+shader_parameter/directional_velocity_max = 1.0
+shader_parameter/angular_velocity_min = 0.0
+shader_parameter/angular_velocity_max = 0.0
+shader_parameter/orbit_velocity_min = 0.0
+shader_parameter/orbit_velocity_max = 0.0
+shader_parameter/radial_velocity_min = null
+shader_parameter/radial_velocity_max = null
+shader_parameter/linear_accel_min = 0.0
+shader_parameter/linear_accel_max = 0.0
+shader_parameter/radial_accel_min = 0.0
+shader_parameter/radial_accel_max = 0.0
+shader_parameter/tangent_accel_min = 0.0
+shader_parameter/tangent_accel_max = 0.0
+shader_parameter/damping_min = 0.0
+shader_parameter/damping_max = 0.0
+shader_parameter/initial_angle_min = 0.0
+shader_parameter/initial_angle_max = 0.0
+shader_parameter/scale_min = 1.0
+shader_parameter/scale_max = 1.0
+shader_parameter/hue_variation_min = 0.0
+shader_parameter/hue_variation_max = 0.0
+shader_parameter/anim_speed_min = 0.0
+shader_parameter/anim_speed_max = 0.0
+shader_parameter/anim_offset_min = 0.0
+shader_parameter/anim_offset_max = 0.0
+shader_parameter/lifetime_randomness = 0.0
+shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
+shader_parameter/emission_shape_scale = Vector3(80, 1, 80)
+shader_parameter/velocity_pivot = Vector3(0, 0, 0)
+shader_parameter/emission_box_extents = Vector3(1, 1, 1)
+shader_parameter/color_value = Color(1, 1, 1, 1)
+shader_parameter/gravity = Vector3(0, -1e-06, 0)
+shader_parameter/heightmap = ExtResource("4_dywpb")
+shader_parameter/spawnmap = ExtResource("7_5tg8v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n23pd"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("7_w37f3")
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4hkjn"]
+material = SubResource("StandardMaterial3D_n23pd")
+size = Vector2(0.3, 0.3)
+orientation = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.662401, -0.034361, 0.748361, -0.74911, -0.0405116, 0.661205, 0.00759749, -0.998588, -0.0525752, -2.85245, 7.4512, 1.0824)
+layers = 1048575
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 7.40833, 29.7462)
+cull_mask = 1023
+script = ExtResource("1_k43x5")
+
+[node name="ManySpheres" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.1909)
+
+[node name="SphereDemo" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 0)
+
+[node name="SphereDemo2" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 1.84229)
+
+[node name="SphereDemo3" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 0)
+
+[node name="SphereDemo4" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 1.84229)
+
+[node name="SphereDemo5" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 4.61895)
+
+[node name="SphereDemo6" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 6.46124)
+
+[node name="SphereDemo7" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 4.61895)
+
+[node name="SphereDemo8" parent="ManySpheres" instance=ExtResource("2_qdqey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 6.46124)
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="Terrain"]
+extra_cull_margin = 5.0
+mesh = SubResource("PlaneMesh_m2ssc")
+surface_material_override/0 = SubResource("ShaderMaterial_tpn1d")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+transform = Transform3D(0.313112, 0, 0, 0, 1, 0, 0, 0, 0.313112, 0, 0, 0)
+shape = SubResource("HeightMapShape3D_2yc2n")
+script = ExtResource("5_8lco4")
+heightmap_texture = ExtResource("4_dywpb")
+height_max = 3.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+extra_cull_margin = 772.02
+amount = 32768
+lifetime = 5.0
+process_material = SubResource("ShaderMaterial_g6ayr")
+draw_pass_1 = SubResource("PlaneMesh_4hkjn")
