@@ -18,7 +18,7 @@ shader_parameter/height_range = 3.0
 shader_parameter/pixel_size = 3.0
 shader_parameter/heightmap = ExtResource("3_w254d")
 
-[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_v3t8w"]
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_2yc2n"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -69,8 +69,8 @@ surface_material_override/0 = SubResource("ShaderMaterial_tpn1d")
 [node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
-transform = Transform3D(0.313, 0, 0, 0, 1, 0, 0, 0, 0.313, 0, 0, 0)
-shape = SubResource("HeightMapShape3D_v3t8w")
+transform = Transform3D(0.313112, 0, 0, 0, 1, 0, 0, 0, 0.313112, 0, 0, 0)
+shape = SubResource("HeightMapShape3D_2yc2n")
 script = ExtResource("5_o445p")
 heightmap_texture = ExtResource("3_w254d")
 height_max = 3.0
