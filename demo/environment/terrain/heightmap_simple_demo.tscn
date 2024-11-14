@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://sjmxtc15t8vk"]
+
+[ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_6hxae"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="2_ix8ad"]
+[ext_resource type="Shader" path="res://environment/terrain/heightmap_shader_simple.gdshader" id="3_j2g15"]
+[ext_resource type="Texture2D" uid="uid://cved8u2y1s6ss" path="res://environment/terrain/heightmap_denali_dem.jpg" id="3_w254d"]
+[ext_resource type="Script" path="res://environment/terrain/heightmap_collision_3d.gd" id="5_o445p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m2ssc"]
+size = Vector2(160, 160)
+subdivide_width = 254
+subdivide_depth = 254
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpn1d"]
+render_priority = 0
+shader = ExtResource("3_j2g15")
+shader_parameter/height_range = 3.0
+shader_parameter/pixel_size = 3.0
+shader_parameter/heightmap = ExtResource("3_w254d")
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_v3t8w"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.662401, -0.034361, 0.748361, -0.74911, -0.0405116, 0.661205, 0.00759749, -0.998588, -0.0525752, -2.85245, 7.4512, 1.0824)
+layers = 1048575
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 7.40833, 29.7462)
+cull_mask = 1023
+script = ExtResource("1_6hxae")
+
+[node name="ManySpheres" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.1909)
+
+[node name="SphereDemo" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 0)
+
+[node name="SphereDemo2" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 1.84229)
+
+[node name="SphereDemo3" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 0)
+
+[node name="SphereDemo4" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 1.84229)
+
+[node name="SphereDemo5" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 4.61895)
+
+[node name="SphereDemo6" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78159, 6.52502, 6.46124)
+
+[node name="SphereDemo7" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 4.61895)
+
+[node name="SphereDemo8" parent="ManySpheres" instance=ExtResource("2_ix8ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170109, 6.52502, 6.46124)
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="Terrain"]
+extra_cull_margin = 5.0
+mesh = SubResource("PlaneMesh_m2ssc")
+surface_material_override/0 = SubResource("ShaderMaterial_tpn1d")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+transform = Transform3D(0.313, 0, 0, 0, 1, 0, 0, 0, 0.313, 0, 0, 0)
+shape = SubResource("HeightMapShape3D_v3t8w")
+script = ExtResource("5_o445p")
+heightmap_texture = ExtResource("3_w254d")
+height_max = 3.0
