@@ -20,6 +20,7 @@ shader = ExtResource("3_o6mhm")
 shader_parameter/height_range = 3.0
 shader_parameter/pixel_size = 3.0
 shader_parameter/heightmap = ExtResource("4_dywpb")
+shader_parameter/colormap = ExtResource("7_5tg8v")
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_2yc2n"]
 

@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://uyawvsf62ny5"]
+
+[ext_resource type="Texture2D" uid="uid://3qd133uipwmi" path="res://textures/circuit_board.png" id="2_7wfr4"]
+[ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="2_njjq6"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_dp1l8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_udn1e"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nj2a"]
+albedo_color = Color(0.245984, 0.245984, 0.245984, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dtw4g"]
+material = SubResource("StandardMaterial3D_1nj2a")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ai1q"]
+radius = 0.2
+height = 4.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6syq7"]
+radius = 0.2
+height = 4.0
+radial_segments = 16
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7u76a"]
+cull_mode = 2
+albedo_texture = ExtResource("2_7wfr4")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_laymt"]
+
+[node name="FabricSceneTest" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_dp1l8")
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground"]
+shape = SubResource("BoxShape3D_udn1e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
+mesh = SubResource("BoxMesh_dtw4g")
+
+[node name="Bar" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.1606, 1.77807, -0.127766)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Bar"]
+shape = SubResource("CapsuleShape3D_4ai1q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Bar"]
+mesh = SubResource("CapsuleMesh_6syq7")
+
+[node name="Bar2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.99459, 1.77807, -0.127766)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Bar2"]
+shape = SubResource("CapsuleShape3D_4ai1q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Bar2"]
+mesh = SubResource("CapsuleMesh_6syq7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59822, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9277, -0.0535504, -0.369467, 0.373328, 0.13307, 0.918106, 0, -0.989659, 0.143441, -4.00235, 7.47656, 0)
+shadow_enabled = true
+
+[node name="SphereDemo" parent="." instance=ExtResource("2_njjq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.00258967)
+
+[node name="SoftBody3D" type="SoftBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9864, 0)
+material_override = SubResource("StandardMaterial3D_7u76a")
+mesh = SubResource("CapsuleMesh_laymt")
+total_mass = 4.01
+linear_stiffness = 0.63
+damping_coefficient = 0.04

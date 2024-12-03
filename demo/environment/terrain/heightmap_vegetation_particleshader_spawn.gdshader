@@ -246,7 +246,7 @@ void start() {
 		 // loop to let us do rejection sampling on world spawn position
 			position = calculate_initial_position(alt_seed);
 			position.y = -1.0; // assume failure position
-			
+
 			// Find spawn position in texture maps
 			vec3 world = (EMISSION_TRANSFORM * vec4(position,1.0)).xyz;
 			vec2 uv = vec2(world.x,world.z)/height_span + vec2(0.5);
@@ -258,7 +258,7 @@ void start() {
 			if (spawn.g>0.5) continue; // don't spawn in brighter regions
 
 			position.y = height;
-			
+
 			break; // if we get here, we have a good spawn point!
 		}
 		//COLOR.a=1.0; // force opaque

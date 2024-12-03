@@ -5,6 +5,7 @@
 shader_type spatial;
 
 uniform sampler2D heightmap : filter_linear, repeat_disable;
+uniform sampler2D colormap : filter_linear, repeat_disable;
 uniform float height_range = 10.0; // heightmap white (1.0) corresponds to this in meters
 uniform float pixel_size = 2.0; // physical size of one heightmap pixel (sets slopes)
 
@@ -28,6 +29,6 @@ void fragment() {
 
 	NORMAL_MAP = vec3(0.5+tilt_x,0.5+tilt_y,1.0);
 
-	ALBEDO = vec3(0.5);
+	ALBEDO = vec3(0.5) * texture(colormap,UV).rgb;
 
 }

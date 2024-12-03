@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://sjmxtc15t8vk"]
+[gd_scene load_steps=10 format=3 uid="uid://sjmxtc15t8vk"]
 
 [ext_resource type="Script" path="res://scripts/player_move_WASD.gd" id="1_6hxae"]
 [ext_resource type="PackedScene" uid="uid://bb2m12t1vdi3f" path="res://physics/rigidbody/rigidbody_sphere_demo.tscn" id="2_ix8ad"]
 [ext_resource type="Shader" path="res://environment/terrain/heightmap_shader_simple.gdshader" id="3_j2g15"]
 [ext_resource type="Texture2D" uid="uid://cved8u2y1s6ss" path="res://environment/terrain/heightmap_denali_dem.jpg" id="3_w254d"]
+[ext_resource type="Texture2D" uid="uid://cbrv0g0joyi7s" path="res://environment/terrain/heightmap_denali_color.jpg" id="4_wyhkk"]
 [ext_resource type="Script" path="res://environment/terrain/heightmap_collision_3d.gd" id="5_o445p"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_m2ssc"]
@@ -17,6 +18,7 @@ shader = ExtResource("3_j2g15")
 shader_parameter/height_range = 3.0
 shader_parameter/pixel_size = 3.0
 shader_parameter/heightmap = ExtResource("3_w254d")
+shader_parameter/colormap = ExtResource("4_wyhkk")
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_2yc2n"]
 
